@@ -6,7 +6,7 @@
 /*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 12:54:56 by ckatz             #+#    #+#             */
-/*   Updated: 2018/06/25 18:56:12 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/06/26 18:19:56 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@
 #include <cstring>
 #include <vector>
 
-enum command { push, pop, dump, assert, add, sub, mul, di, mod , print, exi };
-
-// Checks if line parsed is a comment
 int		isComment(std::string line)
 {
 	if(line.compare(0, 1, ";") == 0)
@@ -29,7 +26,7 @@ int		isComment(std::string line)
 	return (0);
 }
 
-int		isCommand(command currentCommand)
+/*int		isCommand(command currentCommand)
 {
 
 	switch (currentCommand)
@@ -72,7 +69,7 @@ int		isCommand(command currentCommand)
 			break;			
 	}
 	return (0);
-}
+}*/
 
 /*
 int		checkOperandType(std::string line)
@@ -110,14 +107,26 @@ int		main(int argc, char **argv)
 {
 	std::string	fileName;
 	std::string	line;
-	std::string trimLine;
-//	std::string	instruction;
-//	std::string	value;
+	std::string	token;
+	std::vector<std::vector<std::string> > listOfTokens;
 
 	// Read in instructions from the std::in
 	if (argc == 1)
 	{
 		std::cout << "Implement reading from the std::in" << std::endl;
+		//std::cin >> line;
+		while (getline(std::cin, line, '\n'))
+		{
+			std::istringstream is(line);
+			std::vector<std::string> tokens;
+			while (is >> token)
+			{
+				tokens.push_back(token);
+			}
+			if (token == ";;")
+				break;
+			listOfTokens.push_back(tokens);
+		}	
 	}
 	// Read in instructions from text file
 	else if (argc == 2)
@@ -131,18 +140,30 @@ int		main(int argc, char **argv)
 		}
 		else
 		{
-			while (input)
+			while (getline(input, line, '\n'))
 			{
-				std::getline(input, line);
-				std::cout << line << std::endl;
-				trimLine = trimSpace(line);
-
-				//isComment(trimLine);
-
-			}
+				std::istringstream is(line);
+				std::vector<std::string> tokens;
+				while (is >> token)
+				{
+					tokens.push_back(token);
+				}
+				listOfTokens.push_back(tokens);
+			}	
 		}
 	}
 	else
 		std::cout << "Incorrect number of arguements entered" << std::endl;
+	for (int i = 0; i < (int)listOfTokens.size(); i++)
+	{
+		for (int j = 0; j < (int)listOfTokens[i].size(); j++)
+		{
+			std::cout << listOfTokens[i][j] << '+';
+		}	
+		std::cout << std::endl;
+	}
+
 	return (0);
 }
+
+				
