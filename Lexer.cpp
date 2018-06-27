@@ -6,7 +6,7 @@
 /*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 09:05:16 by ckatz             #+#    #+#             */
-/*   Updated: 2018/06/27 13:58:03 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/06/27 15:50:41 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,58 +24,62 @@ Lexer::~Lexer(void)
 	return ;
 }
 
-std::string Lexer::getFileName(void)
-{
-	return _fileName;
-}
-
-std::string Lexer::getLine(void)
-{
-	return _line;
-}
-
-std::string	Lexer::getToken(void)
-{
-	return _token;
-}
-
 std::vector<std::vector<std::string> >  Lexer::getListOfTokens(void)
 {
 	return _listOfTokens;
 }
 
-void	Lexer::setFileName(std::string fileName)
-{
-	this->_fileName = fileName;
-}
-
-void    Lexer::setLine(std::string line)
-{
-	this->_line = line;
-}
-
-void	Lexer::setToken(std::string token)
-{
-	this->_token = token;
-}
-
-void    Lexer::setListOfTokens(std::vector<std::vector<std::string> > listOfTokens)
+void	Lexer::setListOfTokens(std::vector<std::vector<std::string> > listOfTokens)
 {
 	this->_listOfTokens = listOfTokens;
 }
 
-void    readFromStream(std::istream inputStream)
+void    Lexer::readFromStdin(void)
 {
-	 while (getline(inputStreeam, line, '\n'))
-         {
-             std::istringstream is(line);
-             std::vector<std::string> tokens;
-             while (is >> token)
-             {
-                 tokens.push_back(token);
-            }
-             if (token == ";;")
-                 break;
-             listOfTokens.push_back(tokens);
-         }
+	std::string line;
+	std::string token;
+	std::vector<std::vector<std::string> > listOfTokens;
+	
+	std::cout << "Implement reading from the std::in" << std::endl;
+	
+	while (getline(std::cin, line, '\n'))
+	{
+		std::istringstream is(line);
+		std::vector<std::string> tokens;
+		while (is >> token)
+		{ 
+			tokens.push_back(token);
+		}
+		listOfTokens.push_back(tokens);
+		if (token == ";;")
+			break;
+   	}
+	setListOfTokens(listOfTokens);
+}
+
+void	Lexer::readFromFile(std::string fileName)
+{
+	std::string line;
+	std::string token;
+	std::vector<std::vector<std::string> > listOfTokens;
+	std::ifstream input(fileName);
+	
+	if (!input)
+	{
+		std::cout << "Error, can not open input file " << fileName << std::endl;
+	}
+   	else
+	{
+		while (getline(input, line, '\n'))
+		{
+			std::istringstream is(line);
+			std::vector<std::string> tokens;
+			while (is >> token)
+			{
+				tokens.push_back(token);
+			}
+			listOfTokens.push_back(tokens);
+		}
+	}
+	setListOfTokens(listOfTokens);
 }
