@@ -6,16 +6,30 @@
 /*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 08:53:08 by ckatz             #+#    #+#             */
-/*   Updated: 2018/06/27 09:32:03 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/06/27 11:24:04 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_HPP
 #define LEXER_HPP
 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <cstring>
+#include <vector>
+
 class Lexer
 {
 	public:
+
+		//Constructors
+		Lexer(void);
+	//	Lexer(Lexer const & src);
+
+		//Deconstructor
+		~Lexer(void);
 
 		// Getters
 		std::string	getFileName(void);
@@ -25,8 +39,7 @@ class Lexer
 		// Setters
 		void	setFileName(std::string fileName);
 		void	setLine(std::string line);
-		void	setListOftokens();
-
+		void	setListOfTokens(std::vector<std::vector<std::string> > listOfTokens);
 	
 	private:
 		
