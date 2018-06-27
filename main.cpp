@@ -6,7 +6,7 @@
 /*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 12:54:56 by ckatz             #+#    #+#             */
-/*   Updated: 2018/06/27 11:25:36 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/06/27 13:58:00 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,6 @@ std::string[] tokenizeLine(std::string line)
 }
 */
 
-std::string	trimSpace(const std::string &str)
-{
-	auto	start = str.begin();
-	auto	end = str.end();
-	while (start != end && std::isspace(*start))
-	{
-		start++;
-	}
-	return std::string(start, end + 1);
-}
-
 int		main(int argc, char **argv)
 {
 	Lexer	inputLexer;
@@ -111,7 +100,8 @@ int		main(int argc, char **argv)
 	if (argc == 1)
 	{
 		std::cout << "Implement reading from the std::in" << std::endl;
-		//std::cin >> line;
+		inputLexer.setStreamType(std::cin);
+	
 		while (getline(std::cin, line, '\n'))
 		{
 			std::istringstream is(line);
