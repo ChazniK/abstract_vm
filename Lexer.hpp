@@ -6,7 +6,7 @@
 /*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 08:53:08 by ckatz             #+#    #+#             */
-/*   Updated: 2018/06/27 15:51:36 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/06/27 16:32:05 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ class Lexer
 		~Lexer(void);
 
 		// Getters
+		int		getInputType(void);
 		std::vector<std::vector<std::string> >	getListOfTokens(void);
 
 		// Setters
+		void	setInputType(int inputType);
 		void	setListOfTokens(std::vector<std::vector<std::string> > listOfTokens);
 
 		//Functions to read and tokenize file or input from std::in
@@ -42,6 +44,7 @@ class Lexer
 
 	private:
 		
+		int		_inputType;
 		std::vector<std::vector<std::string> >	_listOfTokens;
 };
 

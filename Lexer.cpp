@@ -6,7 +6,7 @@
 /*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 09:05:16 by ckatz             #+#    #+#             */
-/*   Updated: 2018/06/27 15:50:41 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/06/27 16:32:00 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,19 @@ Lexer::~Lexer(void)
 	return ;
 }
 
+int		Lexer::getInputType(void)
+{
+	return this->_inputType;
+}
+
 std::vector<std::vector<std::string> >  Lexer::getListOfTokens(void)
 {
-	return _listOfTokens;
+	return this->_listOfTokens;
+}
+
+void	Lexer::setInputType(int inputType)
+{
+	this->_inputType = inputType;
 }
 
 void	Lexer::setListOfTokens(std::vector<std::vector<std::string> > listOfTokens)
