@@ -6,16 +6,11 @@
 /*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 12:54:56 by ckatz             #+#    #+#             */
-/*   Updated: 2018/06/26 18:19:56 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/06/27 11:25:36 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <cstring>
-#include <vector>
+#include "Lexer.hpp"
 
 int		isComment(std::string line)
 {
@@ -105,6 +100,8 @@ std::string	trimSpace(const std::string &str)
 
 int		main(int argc, char **argv)
 {
+	Lexer	inputLexer;
+
 	std::string	fileName;
 	std::string	line;
 	std::string	token;
@@ -162,7 +159,6 @@ int		main(int argc, char **argv)
 		}	
 		std::cout << std::endl;
 	}
-
 	return (0);
 }
 
