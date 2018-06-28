@@ -6,60 +6,85 @@
 /*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:57:37 by ckatz             #+#    #+#             */
-/*   Updated: 2018/06/27 17:08:57 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/06/28 16:27:21 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Parser.hpp"
 
-enum	command { push, pop, dump, assert, add, sub, mul, div, mod, print, exit }
-
-int		isComment(std::string line)
+Parser::Parser(void)
 {
-
+	std::cout << "Parser constructor called" << std::endl;
+	return;
 }
 
-int		isCommand(command currentCommand)
+Parser::~Parser(void)
 {
+	std::cout << "Parser destructor called" << std::endl;
+	return;
+}
 
-	switch ()
+int     Parser::isComment(std::string line)
+{
+	if (line.compare(0, 1, ";") == 0)
 	{
-		case push:
-			std::cout << "push found" << std::endl;
-			break;
-		case pop:
-			std::cout << "pop found" << std::endl;
-			break;
-		case dump:
-			std::cout << "dump found" << std::endl;
-			break;
-		case assert:
-			std::cout << "assert found" << std::endl;
-			break;
-		case add:
-			std::cout << "add found" << std::endl
-			break;
-		case sub:
-			std::cout << "sub found" << std::endl;
-			break;
-		case mul:
-			std::cout << "mul found" << std::endl;
-			break;
-		case div:
-			std::cout << "div found" << std::endl;
-			break;
-		case mod:
-			std::cout << "mod found" << std::endl;
-			break;
-		case print:
-			std::cout << "print found" << std::endl;
-			break;
-		case exit:
-			std::cout << "exit found" << std::endl;
-			break;
-		default:
-			std::cout << "No command found" << std::endl;
-			break;
+		std::cout << "----------------comment found --------------" << std::endl;
+		return (1);
 	}
+	return (0);
+}
+
+int		Parser::isCommand(std::string currentCommand)
+{
+	if (currentCommand == "push")
+	{
+		std::cout << "push found" << std::endl;
+	}
+	else if (currentCommand == "pop")
+	{
+		std::cout << "pop found" << std::endl;
+	}
+	else if (currentCommand == "dump")
+	{
+		std::cout << "dump found" << std::endl;
+	}
+	else if (currentCommand == "assert")
+	{
+		std::cout << "assert found" << std::endl;
+	}
+	else if (currentCommand == "add")
+	{
+		std::cout << "add found" << std::endl;
+	}
+	else if (currentCommand == "sub")
+	{
+		std::cout << "sub found" << std::endl;
+	}
+	else if (currentCommand == "mul")
+	{
+		std::cout << "mul found" << std::endl;
+	}
+	else if (currentCommand == "div")
+	{
+		std::cout << "div found" << std::endl;
+	}
+	else if (currentCommand == "mod")
+	{
+		std::cout << "mod found" << std::endl;
+	}
+	else if (currentCommand == "print")
+	{
+		std::cout << "pop found" << std::endl;
+	}
+	else if (currentCommand == "exit")
+	{
+		std::cout << "pop found" << std::endl;
+	}
+//	else if (currentCommand.compare(";", 0, 1) == 0)
+//	{
+//		std::cout << "comment found" << std:: endl;
+//	}
+	//else
+	//	std::cout << "command not found" << std::endl;
 	return (0);
 }
