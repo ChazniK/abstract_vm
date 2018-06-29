@@ -6,7 +6,7 @@
 /*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:57:37 by ckatz             #+#    #+#             */
-/*   Updated: 2018/06/28 16:27:21 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/06/29 12:34:19 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,43 @@ int     Parser::isComment(std::string line)
 		return (1);
 	}
 	return (0);
+}
+
+std::string	Parser::getValue(std::string val)
+{
+
+	if (val.compare(0, 4, "int8") == 0)
+	{
+		val.erase(0, 5);
+		val.erase(val.end() - 1);
+	}
+	else if (val.compare(0, 5, "int16") == 0)
+	{
+		val.erase(0, 6);
+		val.erase(val.end() - 1);
+	}
+	else if (val.compare(0, 5, "int32") == 0)
+	{
+		val.erase(0, 6);
+		val.erase(val.end() - 1);
+	}
+	else if (val.compare(0, 5, "float") == 0)
+	{
+		val.erase(0, 6);
+		val.erase(val.end() - 1);
+	}
+	else if (val.compare(0, 6, "double") == 0)
+	{
+		val.erase(0, 7);
+		val.erase(val.end() - 1);
+	}
+	else
+	{
+		std::cout << "value not valid" << std::endl;
+		return (NULL);
+	}
+	return val;
+
 }
 
 int		Parser::isCommand(std::string currentCommand)
@@ -80,11 +117,13 @@ int		Parser::isCommand(std::string currentCommand)
 	{
 		std::cout << "pop found" << std::endl;
 	}
+	else
+		return (0);
 //	else if (currentCommand.compare(";", 0, 1) == 0)
 //	{
 //		std::cout << "comment found" << std:: endl;
 //	}
 	//else
 	//	std::cout << "command not found" << std::endl;
-	return (0);
+	return (1);
 }
