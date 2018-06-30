@@ -6,10 +6,16 @@
 /*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:35:56 by ckatz             #+#    #+#             */
-/*   Updated: 2018/06/29 15:46:28 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/06/30 15:43:37 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef IOPERAND_HPP
+#define IOPERAND_HPP
+
+enum	eOperandType { Int8, Int16, Int32, Float, Double };
+OperandList[] = { Int8, Int16, Int32, Float, Double };
+ 
 class IOperand {
 
 	public:
@@ -27,3 +33,5 @@ class IOperand {
 		
 		virtual ~IOperand( void ) {}
 };
+
+#endif
