@@ -6,18 +6,23 @@
 /*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 12:54:56 by ckatz             #+#    #+#             */
-/*   Updated: 2018/06/29 12:34:10 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/02 18:07:27 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Lexer.hpp"
 #include "Parser.hpp"
+#include "Int32.hpp"
 
 int		main(int argc, char **argv)
 {
 	Lexer		inputLexer;
 	Parser		inputParser;
 	std::vector<std::vector<std::string> > listOfTokens;
+	Int32		test("2145");
+	int	b = test;
+
+	std::cout << b << std::endl;
 
 	// Read in instructions from the std::in
 	if (argc == 1)
@@ -34,8 +39,8 @@ int		main(int argc, char **argv)
 	else
 		std::cout << "Incorrect number of arguements entered" << std::endl;
 	listOfTokens = inputLexer.getListOfTokens();
-	
-	int i = 0; 
+		
+/*	int i = 0; 
 	while (i < (int)listOfTokens.size())
 	{
 		int j = 0;
@@ -58,17 +63,6 @@ int		main(int argc, char **argv)
 			}
 		}	
 		i++;
-	}
+	}*/
 	return (0);
 }
-
-/*
-for (int i = 0; i < (int)listOfTokens.size(); i++)
-	{
-		for (int j = 0; j < (int)listOfTokens[i].size(); j++)
-		{
-			inputParser.isCommand(listOfTokens[i][j]);
-		}	
-		std::cout << std::endl;
-	}
-*/
