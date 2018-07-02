@@ -6,7 +6,7 @@
 /*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 16:03:19 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/02 18:07:51 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/02 18:16:57 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ Int32::operator double(void)
 */
 IOperand const * Int32::operator+(IOperand const & rhs) const
 {
-	return Int32(getValue() + rhs.getValue());
+	Int32 const & lhs = reinterpret_cast <IOperand const &> (getValue());
+	Int32 const & rhs = reinterpret_cast <IOperand const &> (rhs.getValue());
+	return (lhs + rhs);
 }
 
 /*IOperand const * Int32::operator-(IOperand const & rhs) const
