@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Int32.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 16:03:19 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/02 18:16:57 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/03 23:51:05 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,50 @@ Int32::operator double(void)
 */
 IOperand const * Int32::operator+(IOperand const & rhs) const
 {
-	Int32 const & lhs = reinterpret_cast <IOperand const &> (getValue());
-	Int32 const & rhs = reinterpret_cast <IOperand const &> (rhs.getValue());
-	return (lhs + rhs);
+	double					lhsVal;
+	double					rhsVal;
+	double					result;
+	std::stringstream		ss;
+	IOperand				*ret;
+
+	lhsVal = std::strtod(this->StringValue.c_str(), 0);
+	rhsVal = std::strtod(rhs.StringValue.c_str(), 0);
+	result = lhsVal + rhsVal;
+	ss << result;
+	if (getType() < rhs.getType())
+	{
+		return 
+	}
+	else
+	{
+		return (IOperandController::Instance().createOperand(this->getType(),  ss.str()));
+	}
+	return (ret);
+}
+
+IOperand const * IOperandController::createOperand( eOperandType type, std::string const & value ) const
+{
+	IOperand const *RetOperand = (*this.*OperandFt[type])(value);
+	return (RetOperand);
+}
+
+IOperand const * IOperandController::createInt32( std::string const & value ) const
+{
+	class Int32			*retOperand = new class Int32();
+	double				retVal;
+
+	retOperand->StringValue = value;
+	retVal = std::strtod(value.c_str(), 0);
+	//std::cout << "creating int16" << std::endl;
+	if (retVal > 2147483647)
+	{
+		throw ValueOverflow("Error: Int32 Value overflow");
+	}
+	else if (retVal < -2147483648)
+	{
+		throw ValueUnderflow("Error: Int32 Value underflow");
+	}
+	return (retOperand);
 }
 
 /*IOperand const * Int32::operator-(IOperand const & rhs) const
@@ -89,16 +130,15 @@ IOperand const * Int32::operator%(IOperand const & rhs) const
 
 std::string const & Int32::toString( void ) const
 {
-	std::string numAsInt32 = "Hello";
-	return numAsInt32;
+	this->
 }
 
-Int32 & Int32::operator=(Int32 const & src)
-{
-	std::cout << "Int32 copy constructor called" << std::endl;
-	if (this != &src)
-	{
-		this->_value = src.getValue();
-	}
-	return *this;
-}
+// Int32 & Int32::operator=(Int32 const & src)
+// {
+// 	std::cout << "Int32 copy constructor called" << std::endl;
+// 	if (this != &src)
+// 	{
+// 		this->_value = src.getValue();
+// 	}
+// 	return *this;
+// }

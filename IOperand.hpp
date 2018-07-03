@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   IOperand.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:35:56 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/02 18:06:11 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/03 23:42:17 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ enum	eOperandType { INT8, INT16, INT32, FLOAT, DOUBLE };
 class IOperand {
 
 	public:
+
+		std::string	valueAsString;
 
 		virtual int	getPrecision( void ) const = 0; // Precision of the type of the instance
 		virtual eOperandType getType( void ) const = 0; // Type of the instance
