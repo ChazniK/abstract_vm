@@ -6,7 +6,7 @@
 /*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 16:03:19 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/02 18:16:57 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/05 18:50:03 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ Int32::Int32(void)
 
 Int32::Int32(Int32 const & src)
 {
-	std::cout << "Int32 copy constructor called " << src.getValue() << std::endl;
+	std::cout << "Int32 copy constructor called " << std::endl;
 }
 
-Int32::Int32(const std::string numAsString)
+Int32::Int32(double num)
 {
-	this->_value = std::stoi(numAsString);
-	std::cout << "Constructor with of type int32 - value: " << getValue() << std::endl;
+	this->_value = std::stod(num);
+	std::cout << "Constructor with of type int32 - value: " << std::endl;
 }
 
 Int32::~Int32(void)
@@ -44,17 +44,21 @@ eOperandType Int32::getType(void) const
 	return ::INT32;
 }
 
-int32_t Int32::getValue(void) const
+double	Int32::getValue(void) const
 {
 	return this->_value;
 }
 
+void Int32::setValue(double value)
+{
+	this->_value = value;
+}
+/*
 Int32::operator int(void)
 {
 	return this->_value;
 }
 
-/*
 Int32::operator double(void)
 {
 	return static_cast<double>(this->_value);
@@ -62,9 +66,14 @@ Int32::operator double(void)
 */
 IOperand const * Int32::operator+(IOperand const & rhs) const
 {
-	Int32 const & lhs = reinterpret_cast <IOperand const &> (getValue());
-	Int32 const & rhs = reinterpret_cast <IOperand const &> (rhs.getValue());
-	return (lhs + rhs);
+
+	Int32 * val1 = dynamic_cast<Int32*>(getValue());
+	Int32 & val2 = dynamic_cast<Int32>(rhs.getValue());
+	return new (Int32(val1->getValue() + val2.getValue()));
+
+
+	//Int32 *newRhs = &rhs;
+	//Int32 const * rhs = reinterpret_cast <Int32 const *>(*newRhs);
 }
 
 /*IOperand const * Int32::operator-(IOperand const & rhs) const
@@ -85,12 +94,12 @@ IOperand const * Int32::operator/(IOperand const & rhs) const
 IOperand const * Int32::operator%(IOperand const & rhs) const
 {
 	return IOperand(getValue() % rhs.getValue());
-}*/
+}
+*/
 
 std::string const & Int32::toString( void ) const
 {
-	std::string numAsInt32 = "Hello";
-	return numAsInt32;
+	return *(new std::string("NULL"));
 }
 
 Int32 & Int32::operator=(Int32 const & src)
