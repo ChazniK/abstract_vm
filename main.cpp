@@ -6,7 +6,7 @@
 /*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 12:54:56 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/02 18:07:27 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/06 09:59:34 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ int		main(int argc, char **argv)
 	Lexer		inputLexer;
 	Parser		inputParser;
 	std::vector<std::vector<std::string> > listOfTokens;
-	Int32		test("2145");
-	int	b = test;
+	IOperand		* test =  new Int32("21.45");
+	IOperand		* test2 = new Int32("21");
+	std::cout << "add\n";
+	IOperand const * result = *test + *test2;
 
-	std::cout << b << std::endl;
+	std::cout << result->toString() << std::endl;
 
 	// Read in instructions from the std::in
 	if (argc == 1)

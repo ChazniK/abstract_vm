@@ -19,12 +19,12 @@ Int32::Int32(void)
 
 Int32::Int32(Int32 const & src)
 {
-	std::cout << "Int32 copy constructor called " << src.getValue() << std::endl;
+	std::cout << "Int32 copy constructor called " << src.toString() << std::endl;
 }
 
 Int32::Int32(const std::string numAsString)
 {
-	this->_value = std::stoi(numAsString);
+	this->_value = numAsString;
 	std::cout << "Constructor with of type int32 - value: " << getValue() << std::endl;
 }
 
@@ -44,15 +44,18 @@ eOperandType Int32::getType(void) const
 	return ::INT32;
 }
 
-int32_t Int32::getValue(void) const
+std::string Int32::getValue(void) const
 {
 	return this->_value;
 }
-
-Int32::operator int(void)
+std::string const & Int32::toString( void ) const
 {
 	return this->_value;
 }
+// Int32::operator int(void)
+// {
+// 	return this->_value;
+// }
 
 /*
 Int32::operator double(void)
@@ -62,51 +65,60 @@ Int32::operator double(void)
 */
 IOperand const * Int32::operator+(IOperand const & rhs) const
 {
-	double					lhsVal;
-	double					rhsVal;
-	double					result;
-	std::stringstream		ss;
-	IOperand				*ret;
+	std::cout << "add func\n";
+	long double a = std::stold(this->_value);
+	long double b = std::stold(rhs.toString());
+	std::cout << "adding\n";
+	a = a + b;
+	std::cout << "converting\n";
+	// std::to_string (static_cast<int32_t>(a));
+	// return creta(rhs.getType(), a)
+	return new Int32(std::to_string (static_cast<int32_t>(a)));
+	// double					lhsVal;
+	// double					rhsVal;
+	// double					result;
+	// std::stringstream		ss;
+	// IOperand				*ret;
 
-	lhsVal = std::strtod(this->StringValue.c_str(), 0);
-	rhsVal = std::strtod(rhs.StringValue.c_str(), 0);
-	result = lhsVal + rhsVal;
-	ss << result;
-	if (getType() < rhs.getType())
-	{
-		return 
-	}
-	else
-	{
-		return (IOperandController::Instance().createOperand(this->getType(),  ss.str()));
-	}
-	return (ret);
+	// lhsVal = std::strtod(this->StringValue.c_str(), 0);
+	// rhsVal = std::strtod(rhs.StringValue.c_str(), 0);
+	// result = lhsVal + rhsVal;
+	// ss << result;
+	// if (getType() < rhs.getType())
+	// {
+	// 	return 
+	// }
+	// else
+	// {
+	// 	return (IOperandController::Instance().createOperand(this->getType(),  ss.str()));
+	// }
+	// return (ret);
 }
 
-IOperand const * IOperandController::createOperand( eOperandType type, std::string const & value ) const
-{
-	IOperand const *RetOperand = (*this.*OperandFt[type])(value);
-	return (RetOperand);
-}
+// IOperand const * IOperandController::createOperand( eOperandType type, std::string const & value ) const
+// {
+// 	IOperand const *RetOperand = (*this.*OperandFt[type])(value);
+// 	return (RetOperand);
+// }
 
-IOperand const * IOperandController::createInt32( std::string const & value ) const
-{
-	class Int32			*retOperand = new class Int32();
-	double				retVal;
+// IOperand const * IOperandController::createInt32( std::string const & value ) const
+// {
+// 	class Int32			*retOperand = new class Int32();
+// 	double				retVal;
 
-	retOperand->StringValue = value;
-	retVal = std::strtod(value.c_str(), 0);
-	//std::cout << "creating int16" << std::endl;
-	if (retVal > 2147483647)
-	{
-		throw ValueOverflow("Error: Int32 Value overflow");
-	}
-	else if (retVal < -2147483648)
-	{
-		throw ValueUnderflow("Error: Int32 Value underflow");
-	}
-	return (retOperand);
-}
+// 	retOperand->StringValue = value;
+// 	retVal = std::strtod(value.c_str(), 0);
+// 	//std::cout << "creating int16" << std::endl;
+// 	if (retVal > 2147483647)
+// 	{
+// 		throw ValueOverflow("Error: Int32 Value overflow");
+// 	}
+// 	else if (retVal < -2147483648)
+// 	{
+// 		throw ValueUnderflow("Error: Int32 Value underflow");
+// 	}
+// 	return (retOperand);
+// }
 
 /*IOperand const * Int32::operator-(IOperand const & rhs) const
 {
@@ -128,17 +140,17 @@ IOperand const * Int32::operator%(IOperand const & rhs) const
 	return IOperand(getValue() % rhs.getValue());
 }*/
 
-std::string const & Int32::toString( void ) const
-{
-	this->
-}
-
-// Int32 & Int32::operator=(Int32 const & src)
+// std::string const & Int32::toString( void ) const
 // {
-// 	std::cout << "Int32 copy constructor called" << std::endl;
-// 	if (this != &src)
-// 	{
-// 		this->_value = src.getValue();
-// 	}
-// 	return *this;
+// 	this->
 // }
+
+Int32 & Int32::operator=(Int32 const & src)
+{
+	std::cout << "Int32 copy constructor called" << std::endl;
+	if (this != &src)
+	{
+		this->_value = src.getValue();
+	}
+	return *this;
+}
