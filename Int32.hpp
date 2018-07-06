@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 15:47:12 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/06 10:12:58 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/06 12:02:15 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <cmath>
 
 class Int32: public IOperand
 {
@@ -26,18 +27,16 @@ class Int32: public IOperand
 		Int32(Int32 const & src);
 		Int32(const std::string numAsString);
 		~Int32(void);
-		
+
 		virtual int	getPrecision(void) const;
 		virtual eOperandType getType(void) const;
 
-		std::string	getValue(void) const;	
-	
 		virtual IOperand const * operator+(IOperand const & rhs) const;
-		/*virtual IOperand const * operator-(IOperand const & rhs) const;
+		virtual IOperand const * operator-(IOperand const & rhs) const;
 		virtual IOperand const * operator*(IOperand const & rhs) const;
 		virtual IOperand const * operator/(IOperand const & rhs) const;
-		virtual IOperand const * operator%(IOperand const & rhs) const;*/		
-	
+		virtual IOperand const * operator%(IOperand const & rhs) const;		
+
 		virtual std::string const & toString( void ) const;
 
 		Int32 & operator=(Int32 const & src);

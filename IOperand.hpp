@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:35:56 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/06 09:46:37 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/06 11:37:24 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ class IOperand {
 		virtual eOperandType getType( void ) const = 0; // Type of the instance
 		
 		virtual IOperand const * operator+( IOperand const & rhs ) const = 0; // Sum
-		/*virtual IOperand const * operator-( IOperand const & rhs ) const = 0; // Difference
+		virtual IOperand const * operator-( IOperand const & rhs ) const = 0; // Difference
 		virtual IOperand const * operator*( IOperand const & rhs ) const = 0; // Product
 		virtual IOperand const * operator/( IOperand const & rhs ) const = 0; // Quotient
-		virtual IOperand const * operator%( IOperand const & rhs ) const = 0; // Modulo*/
+		virtual IOperand const * operator%( IOperand const & rhs ) const = 0; // Modulo
 
 		virtual std::string const & toString( void ) const = 0; // String representation of the instance
 		
