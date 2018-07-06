@@ -8,5 +8,7 @@
         "stdexcept": "cpp",
         "typeinfo": "cpp",
         "algorithm": "cpp"
-    }
+    },
+    "42header.email": "ckatz@student.wethinkcode.co.za",
+    "42header.username": "ckatz"
 }

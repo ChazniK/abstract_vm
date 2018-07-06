@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Int32.hpp                                          :+:      :+:    :+:   */
+/*   Double.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/29 15:47:12 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/06 12:06:39 by ckatz            ###   ########.fr       */
+/*   Created: 2018/07/06 12:20:37 by ckatz             #+#    #+#             */
+/*   Updated: 2018/07/06 16:01:23 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INT32_HPP
-#define INT32_HPP
+#ifndef DOUBLE_HPP
+#define DOUBLE_HPP
 
 #include "IOperand.hpp"
 #include <iostream>
@@ -19,14 +19,14 @@
 #include <sstream>
 #include <cmath>
 
-class Int32: public IOperand
+class Double: public IOperand
 {
 	public:
 
-		Int32(void);
-		Int32(Int32 const & src);
-		Int32(const std::string numAsString);
-		~Int32(void);
+		Double(void);
+		Double(Double const & src);
+		Double(const std::string numAsString);
+		~Double(void);
 
 		virtual int	getPrecision(void) const;
 		virtual eOperandType getType(void) const;
@@ -35,13 +35,14 @@ class Int32: public IOperand
 		virtual IOperand const * operator-(IOperand const & rhs) const;
 		virtual IOperand const * operator*(IOperand const & rhs) const;
 		virtual IOperand const * operator/(IOperand const & rhs) const;
-		virtual IOperand const * operator%(IOperand const & rhs) const;		
+		virtual IOperand const * operator%(IOperand const & rhs) const;
 
 		virtual std::string const & toString( void ) const;
 
-		Int32 & operator=(Int32 const & src);
+		Double & operator=(Double const & src);
 
 	private:
+
 		std::string _value;
 };
 
