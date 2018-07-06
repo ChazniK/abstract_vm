@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Int8.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:17:59 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/06 16:39:11 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/06 22:31:49 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class Int8: public IOperand
 
 		Int8(void);
 		Int8(Int8 const & src);
-		Int8(const std::string numAsString);
+		Int8(const std::string numAsString, eOperandType type);
 		~Int8(void);
 
 		virtual int	getPrecision(void) const;
@@ -43,7 +43,8 @@ class Int8: public IOperand
 
 	private:
 
-		std::string _value;
+		std::string		_value;
+		eOperandType	_type;
 };
 
 #endif

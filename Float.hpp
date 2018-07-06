@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Float.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:20:37 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/06 12:20:43 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/06 22:26:21 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class Float: public IOperand
 
 		Float(void);
 		Float(Float const & src);
-		Float(const std::string numAsString);
+		Float(const std::string numAsString, eOperandType type);
 		~Float(void);
 
 		virtual int	getPrecision(void) const;
@@ -43,7 +43,8 @@ class Float: public IOperand
 
 	private:
 
-		std::string _value;
+		std::string		_value;
+		eOperandType	_type;
 };
 
 #endif

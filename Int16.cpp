@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Int16.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:17:32 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/06 12:18:10 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/06 22:54:33 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ Int16::Int16(Int16 const & src)
 	std::cout << "Int16 copy constructor called " << src.toString() << std::endl;
 }
 
-Int16::Int16(const std::string numAsString)
+Int16::Int16(const std::string numAsString, eOperandType type)
 {
 	this->_value = numAsString;
-	std::cout << "Constructor with of type int16 - value: " << numAsString << std::endl;
+	std::cout << "Constructor of type int16 - value: " << numAsString << " type: " << type << std::endl;
 }
 
 Int16::~Int16(void)
@@ -104,6 +104,7 @@ Int16 & Int16::operator=(Int16 const & src)
 	if (this != &src)
 	{
 		this->_value = src.toString();
+		this->_type = src.getType();
 	}
 	return *this;
 }

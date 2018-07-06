@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 16:03:19 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/06 12:02:18 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/06 23:40:34 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ Int32::Int32(Int32 const & src)
 	std::cout << "Int32 copy constructor called " << src.toString() << std::endl;
 }
 
-Int32::Int32(const std::string numAsString)
+Int32::Int32(const std::string numAsString, eOperandType type)
 {
 	this->_value = numAsString;
-	std::cout << "Constructor with of type int32 - value: " << numAsString << std::endl;
+	this->_type = type;
+	std::cout << "Constructor of type int32 - value: " << numAsString <<" type: " << type << std::endl;
 }
 
 Int32::~Int32(void)
@@ -104,6 +105,7 @@ Int32 & Int32::operator=(Int32 const & src)
 	if (this != &src)
 	{
 		this->_value = src.toString();
+		this->_type = src.getType();
 	}
 	return *this;
 }

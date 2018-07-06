@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Int16.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:18:47 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/06 12:18:55 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/06 22:54:18 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class Int16: public IOperand
 
 		Int16(void);
 		Int16(Int16 const & src);
-		Int16(const std::string numAsString);
+		Int16(const std::string numAsString, eOperandType type);
 		~Int16(void);
 
 		virtual int	getPrecision(void) const;
@@ -43,7 +43,8 @@ class Int16: public IOperand
 
 	private:
 
-		std::string _value;
+		std::string 	_value;
+		eOperandType	_type;
 };
 
 #endif

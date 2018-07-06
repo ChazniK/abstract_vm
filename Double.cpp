@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:21:00 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/06 16:01:29 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/06 22:39:17 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ Double::Double(Double const & src)
 	std::cout << "Double copy constructor called " << src.toString() << std::endl;
 }
 
-Double::Double(const std::string numAsString)
+Double::Double(const std::string numAsString, eOperandType type)
 {
 	this->_value = numAsString;
-	std::cout << "Constructor with of type Double - value: " << numAsString << std::endl;
+	this->_type = type;
+	std::cout << "Constructor with type Double - value: " << numAsString << "type: " << type << std::endl;
 }
 
 Double::~Double(void)
@@ -104,6 +105,7 @@ Double & Double::operator=(Double const & src)
 	if (this != &src)
 	{
 		this->_value = src.toString();
+		this->_type = src.getType();
 	}
 	return *this;
 }

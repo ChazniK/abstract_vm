@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Float.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:21:00 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/06 12:21:05 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/06 22:39:59 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ Float::Float(Float const & src)
 	std::cout << "Float copy constructor called " << src.toString() << std::endl;
 }
 
-Float::Float(const std::string numAsString)
+Float::Float(const std::string numAsString, eOperandType type)
 {
 	this->_value = numAsString;
-	std::cout << "Constructor with of type float - value: " << numAsString << std::endl;
+	this->_type = type;
+	std::cout << "Constructor with type float - value: " << numAsString << " type: " << type << std::endl;
 }
 
 Float::~Float(void)
@@ -104,6 +105,7 @@ Float & Float::operator=(Float const & src)
 	if (this != &src)
 	{
 		this->_value = src.toString();
+		this->_type = src.getType();
 	}
 	return *this;
 }

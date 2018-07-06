@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 15:47:12 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/06 12:06:39 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/06 23:41:53 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class Int32: public IOperand
 
 		Int32(void);
 		Int32(Int32 const & src);
-		Int32(const std::string numAsString);
+		Int32(const std::string numAsString, eOperandType type);
 		~Int32(void);
 
 		virtual int	getPrecision(void) const;
@@ -42,7 +42,8 @@ class Int32: public IOperand
 		Int32 & operator=(Int32 const & src);
 
 	private:
-		std::string _value;
+		std::string		_value;
+		eOperandType	_type;
 };
 
 #endif

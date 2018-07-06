@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:20:37 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/06 16:01:23 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/06 22:20:52 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class Double: public IOperand
 
 		Double(void);
 		Double(Double const & src);
-		Double(const std::string numAsString);
+		Double(const std::string numAsString, eOperandType type);
 		~Double(void);
 
 		virtual int	getPrecision(void) const;
@@ -43,7 +43,8 @@ class Double: public IOperand
 
 	private:
 
-		std::string _value;
+		std::string		_value;
+		eOperandType	_type;
 };
 
 #endif

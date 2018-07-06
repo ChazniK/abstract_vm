@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Int8.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:08:52 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/06 12:24:09 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/06 22:47:38 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ Int8::Int8(Int8 const & src)
 	std::cout << "Int8 copy constructor called " << src.toString() << std::endl;
 }
 
-Int8::Int8(const std::string numAsString)
+Int8::Int8(const std::string numAsString, eOperandType type)
 {
 	this->_value = numAsString;
-	std::cout << "Constructor with of type Int8 - value: " << numAsString << std::endl;
+	this->_type = type;
+	std::cout << "Constructor with type Int8 - value: " << numAsString <<" type: " << type << std::endl;
 }
 
 Int8::~Int8(void)
@@ -44,7 +45,7 @@ eOperandType Int8::getType(void) const
 	return ::INT8;
 }
 
-std::string const & Int8::toString( void ) const
+std::string const & Int8::toString(void) const
 {
 	return this->_value;
 }
@@ -104,6 +105,7 @@ Int8 & Int8::operator=(Int8 const & src)
 	if (this != &src)
 	{
 		this->_value = src.toString();
+		this->_type = src.getType();
 	}
 	return *this;
 }
