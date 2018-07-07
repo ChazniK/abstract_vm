@@ -3,27 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 12:54:56 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/05 17:52:51 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/07 09:44:21 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Lexer.hpp"
 #include "Parser.hpp"
 #include "Int32.hpp"
+#include "Double.hpp"
 
 int		main(int argc, char **argv)
 {
 	Lexer		inputLexer;
 	Parser		inputParser;
 	std::vector<std::vector<std::string> > listOfTokens;
-	Int32	test1(2);
-	Int32	test2(3);
-	Int32	result = test1 + test2;
-	
-	std::cout << result.getValue() << std::endl;
+	// IOperand		* test =  new Double("21.45");
+	// IOperand		* test2 = new Double("21");
+	// std::cout << "add\n";
+	// IOperand const * result = *test + *test2;
+	// std::cout << result->toString() << std::endl;
+/*
+	IOperand		* test =  new Int32("21.45");
+	IOperand		* test2 = new Int32("21");
+	std::cout << "sub\n";
+	IOperand const * result = *test - *test2;
+	std::cout << result->toString() << std::endl;
+
+	IOperand		* test =  new Int32("21.45");
+	IOperand		* test2 = new Int32("10");
+	std::cout << "mul\n";
+	IOperand const * result = *test * *test2;
+	std::cout << result->toString() << std::endl;
+
+
+	IOperand		* test =  new Int32("21.45");
+	IOperand		* test2 = new Int32("21");
+	std::cout << "div\n";
+	IOperand const * result = *test / *test2;
+	std::cout << result->toString() << std::endl;
+
+	IOperand		* test =  new Int32("25");
+	IOperand		* test2 = new Int32("20");
+	std::cout << "mod\n";
+	IOperand const * result = *test % *test2;
+	std::cout << result->toString() << std::endl;
+
+	IOperand		* test =  new Int32("21.45");
+	IOperand		* test2 = new Int32("21");
+	std::cout << "add\n";
+	IOperand const * result = *test + *test2;
+	std::cout << result->toString() << std::endl;
+	*/
 
 	// Read in instructions from the std::in
 	if (argc == 1)

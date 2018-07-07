@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Int32.hpp                                          :+:      :+:    :+:   */
+/*   Int8.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/29 15:47:12 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/07 09:42:35 by ckatz            ###   ########.fr       */
+/*   Created: 2018/07/06 12:17:59 by ckatz             #+#    #+#             */
+/*   Updated: 2018/07/06 22:31:49 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INT32_HPP
-#define INT32_HPP
+#ifndef INT8_HPP
+#define INT8_HPP
 
 #include "IOperand.hpp"
 #include <iostream>
@@ -19,14 +19,14 @@
 #include <sstream>
 #include <cmath>
 
-class Int32: public IOperand
+class Int8: public IOperand
 {
 	public:
 
-		Int32(void);
-		Int32(Int32 const & src);
-		Int32(const std::string numAsString, eOperandType type);
-		~Int32(void);
+		Int8(void);
+		Int8(Int8 const & src);
+		Int8(const std::string numAsString, eOperandType type);
+		~Int8(void);
 
 		virtual int	getPrecision(void) const;
 		virtual eOperandType getType(void) const;
@@ -35,13 +35,14 @@ class Int32: public IOperand
 		virtual IOperand const * operator-(IOperand const & rhs) const;
 		virtual IOperand const * operator*(IOperand const & rhs) const;
 		virtual IOperand const * operator/(IOperand const & rhs) const;
-		virtual IOperand const * operator%(IOperand const & rhs) const;		
+		virtual IOperand const * operator%(IOperand const & rhs) const;
 
 		virtual std::string const & toString( void ) const;
 
-		Int32 & operator=(Int32 const & src);
+		Int8 & operator=(Int8 const & src);
 
 	private:
+
 		std::string		_value;
 		eOperandType	_type;
 };

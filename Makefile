@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ckatz <marvin@42.fr>                       +#+  +:+       +#+         #
+#    By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/25 10:06:31 by ckatz             #+#    #+#              #
-#    Updated: 2018/07/05 14:45:55 by ckatz            ###   ########.fr        #
+#    Updated: 2018/07/07 09:43:37 by ckatz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = avm
-SRCS = main.cpp Lexer.cpp Parser.cpp Int32.cpp
-OBJS = main.o Lexer.o Parser.o Int32.o
+SRCS = main.cpp Lexer.cpp Parser.cpp Int32.cpp Double.cpp
+OBJS = main.o Lexer.o Parser.o Int32.o Double.o
 CXX = clang++
-CXXFLAGS = #-Wall -Wextra -Werror -Wno-c++11-extensions
+CXXFLAGS = -Wall -Wextra -Werror #-Wno-c++11-extensions
 
 all: $(NAME)
 
