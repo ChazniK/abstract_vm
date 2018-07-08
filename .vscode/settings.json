@@ -1,14 +1,15 @@
 {
-    "files.associations": {
-        "__config": "cpp",
-        "__nullptr": "cpp",
-        "exception": "cpp",
-        "initializer_list": "cpp",
-        "new": "cpp",
-        "stdexcept": "cpp",
-        "typeinfo": "cpp",
-        "algorithm": "cpp"
-    },
+	"files.associations": {
+		"__config": "cpp",
+		"__nullptr": "cpp",
+		"exception": "cpp",
+		"initializer_list": "cpp",
+		"new": "cpp",
+		"stdexcept": "cpp",
+		"typeinfo": "cpp",
+		"algorithm": "cpp",
+		"cstdint": "cpp"
+	},
     "42header.email": "ckatz@student.wethinkcode.co.za",
     "42header.username": "ckatz"
 }

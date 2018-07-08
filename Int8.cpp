@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:08:52 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/06 22:47:38 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/08 18:27:41 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ Int8::~Int8(void)
 
 int	Int8::getPrecision(void) const
 {
-	eOperandType precision = INT32;
+	eOperandType precision = Int8;
 	return precision;
 }
 
@@ -52,51 +52,62 @@ std::string const & Int8::toString(void) const
 
 IOperand const * Int8::operator+(IOperand const & rhs) const
 {
-	long double a = std::stold(this->_value);
+	eOperandType	newType;
+	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-	std::cout << "adding\n";
+
+	std::cout << "adding\n";	
 	long double result = a + b;
-	std::cout << "converting\n";
-	return new Int8(std::to_string (static_cast<int8_t>(result)));
+	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
+	return checkOperand(newType, result);	
 }
 
 IOperand const * Int8::operator-(IOperand const & rhs) const
 {
-	long double a = std::stold(this->_value);
+	eOperandType	newType;
+	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-	std::cout << "sub\n";
+
+	std::cout << "subtracting\n";	
 	long double result = a - b;
-	std::cout << "converting\n";
-	return new Int8(std::to_string (static_cast<int8_t>(result)));
+	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
+	return checkOperand(newType, result);
 }
 IOperand const * Int8::operator*(IOperand const & rhs) const
 {
-	long double a = std::stold(this->_value);
+	eOperandType	newType;
+	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-	std::cout << "mul\n";
+
+	std::cout << "multiplying\n";	
 	long double result = a * b;
-	std::cout << "converting\n";
-	return new Int8(std::to_string (static_cast<int8_t>(result)));
+	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
+	return checkOperand(newType, result);
 }
 
 IOperand const * Int8::operator/(IOperand const & rhs) const
 {
-	long double a = std::stold(this->_value);
+	eOperandType	newType;
+	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-	std::cout << "div\n";
+
+	std::cout << "dividing\n";	
 	long double result = a / b;
-	std::cout << "converting\n";
-	return new Int8(std::to_string (static_cast<int8_t>(result)));
+	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
+	return checkOperand(newType, result);
 }
 
 IOperand const * Int8::operator%(IOperand const & rhs) const
 {
-	long double a = std::stold(this->_value);
+	eOperandType	newType;
+	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-	std::cout << "mod\n";
+
+	std::cout << "modding\n";	
 	long double result = std::fmod(a, b);
-	std::cout << "converting\n";
-	return new Int8(std::to_string (static_cast<int8_t>(result)));
+	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
+	return checkOperand(newType, result);
+
 }
 
 Int8 & Int8::operator=(Int8 const & src)

@@ -6,25 +6,24 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 12:54:56 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/07 09:44:21 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/08 17:01:50 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Lexer.hpp"
-#include "Parser.hpp"
 #include "Int32.hpp"
 #include "Double.hpp"
 
 int		main(int argc, char **argv)
 {
 	Lexer		inputLexer;
-	Parser		inputParser;
+	// Parser		inputParser;
 	std::vector<std::vector<std::string> > listOfTokens;
-	// IOperand		* test =  new Double("21.45");
-	// IOperand		* test2 = new Double("21");
-	// std::cout << "add\n";
-	// IOperand const * result = *test + *test2;
-	// std::cout << result->toString() << std::endl;
+	IOperand		* test =  new Int32("25", DOUBLE);
+	IOperand		* test2 = new Int32("21", DOUBLE);
+	std::cout << "add\n";
+	IOperand const * result = *test + *test2;
+	std::cout << result->toString() << std::endl;
 /*
 	IOperand		* test =  new Int32("21.45");
 	IOperand		* test2 = new Int32("21");

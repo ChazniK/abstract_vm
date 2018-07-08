@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 15:47:12 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/07 09:42:35 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/08 16:59:43 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ class Int32: public IOperand
 		virtual IOperand const * operator*(IOperand const & rhs) const;
 		virtual IOperand const * operator/(IOperand const & rhs) const;
 		virtual IOperand const * operator%(IOperand const & rhs) const;		
+
+		IOperand const * checkOperand(eOperandType newType, long double result) const;
 
 		virtual std::string const & toString( void ) const;
 
