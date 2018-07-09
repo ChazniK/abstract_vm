@@ -6,148 +6,61 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 16:30:26 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/08 20:09:59 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/09 15:20:50 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "OperandFactory.hpp"
 #include <limits>
+#include <cfloat>
 
 OperandFactory::OperandFactory(void)
 {
-	std::cout << "Double constructor called" << std::endl;
+	std::cout << "Factory constructor called" << std::endl;
+
+	this->funct[eOperandType::INT8] = &OperandFactory::createInt8;
+	this->funct[eOperandType::INT16] = &OperandFactory::createInt16;
+	this->funct[eOperandType::INT32] = &OperandFactory::createInt32;
+	this->funct[eOperandType::FLOAT] = &OperandFactory::createFloat;
+	this->funct[eOperandType::DOUBLE] = &OperandFactory::createDouble;
 }
 
 OperandFactory::~OperandFactory(void)
 {
-	std::cout << "Double destructor called" << std::endl;
+	std::cout << "Factory destructor called" << std::endl;
 }
 
-IOperand const * OperandFactory::createInt8( std::string const & value ) const
+IOperand const * OperandFactory::createInt8(std::string const & value) const
 {
-	IOperand	*result = NULL;
-	long double	num;
-	
-	num = std::stold(value);
-	if ( num < std::numeric_limits<int8_t>::min())
-	{
-		std::cout << "Underflow error" << std::endl;
-	}
-	else if ( num > std::numeric_limits<int8_t>::max())
-	{
-		std::cout << "Overflow error" << std::endl;
-	}
-	else
-	{
-		result = new Int8(std::to_string (static_cast<int8_t>(num)), INT8);
-	}
-	return result;
+	std::cout << "Creating int8" << std::endl;
+	return new Int8(value, INT8);
 }
 
-IOperand const * OperandFactory::createInt16( std::string const & value ) const
+IOperand const * OperandFactory::createInt16(std::string const & value) const
 {
-	IOperand	*result = NULL;
-	long double	num;
-	
-	num = std::stold(value);
-	if ( num < std::numeric_limits<int16_t>::min())
-	{
-		std::cout << "Underflow error" << std::endl;
-	}
-	else if ( num > std::numeric_limits<int16_t>::max())
-	{
-		std::cout << "Overflow error" << std::endl;
-	}
-	else
-	{
-		result = new Int16(std::to_string (static_cast<int16_t>(num)), INT16);
-	}
-	return result;
+	std::cout << "Creating int16" << std::endl;
+	return new Int16(value, INT16);
 }
 
-IOperand const * OperandFactory::createInt32( std::string const & value ) const
+IOperand const * OperandFactory::createInt32(std::string const & value) const
 {
-	IOperand	*result = NULL;
-	long double	num;
-	
-	num = std::stold(value);
-	if ( num < std::numeric_limits<int32_t>::min())
-	{
-		std::cout << "Underflow error" << std::endl;
-	}
-	else if ( num > std::numeric_limits<int32_t>::max())
-	{
-		std::cout << "Overflow error" << std::endl;
-	}
-	else
-	{
-		result = new Int32(std::to_string (static_cast<int32_t>(num)), INT32);
-	}
-	return result;
+	std::cout << "Creating int32" << std::endl;
+	return new Int32(value, INT32);
 }
 
-IOperand const * OperandFactory::createFloat( std::string const & value ) const
+IOperand const * OperandFactory::createFloat(std::string const & value) const
 {
-	IOperand	*result = NULL;
-	long double	num;
-	
-	num = std::stold(value);
-	if ( num < std::numeric_limits<float>::min())
-	{
-		std::cout << "Underflow error" << std::endl;
-	}
-	else if ( num > std::numeric_limits<float>::max())
-	{
-		std::cout << "Overflow error" << std::endl;
-	}
-	else
-	{
-		result = new Float(std::to_string (static_cast<float_t>(num)), INT32);
-	}
-	return result;
+	std::cout << "Creating float" << std::endl;
+	return new Float(value, FLOAT);
 }
 
-IOperand const * OperandFactory::createDouble( std::string const & value ) const
+IOperand const * OperandFactory::createDouble(std::string const & value) const
 {
-	IOperand	*result = NULL;
-	long double	num;
-	
-	num = std::stold(value);
-	if ( num < std::numeric_limits<double>::min())
-	{
-		std::cout << "Underflow error" << std::endl;
-	}
-	else if ( num > std::numeric_limits<double>::max())
-	{
-		std::cout << "Overflow error" << std::endl;
-	}
-	else
-	{
-		result = new Double(std::to_string (static_cast<double_t>(num)), INT32);
-	}
-	return result;
+	std::cout << "Creating double" << std::endl;
+	return new Double(value, DOUBLE);
 }
 
 IOperand const * OperandFactory::createOperand(eOperandType type, std::string const & value) const
-{
-	switch(type)
-	{
-		case 0:
-			return createInt8(value);
-			break;
-		case 1:
-			return createInt16(value);
-			break;
-		case 2:
-			return createInt32(value);
-			break;
-		case 3:
-			return createFloat(value);
-			break;
-		case 4:
-			return createDouble(value);
-			break;
-		default:
-			return NULL;
-	}
+{	
+	return (this->*funct[type])(value);
 }

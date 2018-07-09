@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 16:30:34 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/08 18:21:33 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/09 15:17:34 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,16 @@ class OperandFactory
 		OperandFactory(void);
 		~OperandFactory(void);
 		IOperand const * createOperand(eOperandType type, std::string const & value) const;
+		IOperand const * (OperandFactory::*funct[5])(std::string const & value) const;
+
 
 	private:
 
-		IOperand const * createInt8( std::string const & value ) const;
-		IOperand const * createInt16( std::string const & value ) const;
-		IOperand const * createInt32( std::string const & value ) const;
-		IOperand const * createFloat( std::string const & value ) const;
-		IOperand const * createDouble( std::string const & value ) const;
+		IOperand const * createInt8(std::string const & value) const;
+		IOperand const * createInt16(std::string const & value) const;
+		IOperand const * createInt32(std::string const & value) const;
+		IOperand const * createFloat(std::string const & value) const;
+		IOperand const * createDouble(std::string const & value) const;
 };
 
 #endif
