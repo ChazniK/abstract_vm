@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:20:37 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/08 21:06:08 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/09 16:39:42 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ class Float: public IOperand
 	public:
 
 		Float(void);
-		Float(Float const & src);
 		Float(const std::string numAsString, eOperandType type);
+		Float(Float const & src);
 		~Float(void);
 
 		virtual int	getPrecision(void) const;

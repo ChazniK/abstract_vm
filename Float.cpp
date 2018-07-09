@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:21:00 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/08 21:06:20 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/09 16:39:29 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,18 @@ Float::Float(void)
 	std::cout << "Float constructor called" << std::endl;
 }
 
+Float::Float(const std::string numAsString, eOperandType type)
+{
+	long double t = stold(numAsString);
+	float_t temp = static_cast<float_t>(t);
+	this->_value = std::to_string(temp);
+	this->_type = type;
+	std::cout << "Constructor with of type: " << type << " value: " << numAsString << std::endl;
+}
+
 Float::Float(Float const & src)
 {
 	std::cout << "Float copy constructor called " << src.toString() << std::endl;
-}
-
-Float::Float(const std::string numAsString, eOperandType type)
-{
-	this->_value = numAsString;
-	this->_type = type;
-	std::cout << "Constructor with type float - value: " << numAsString << " type: " << type << std::endl;
 }
 
 Float::~Float(void)
@@ -36,13 +38,13 @@ Float::~Float(void)
 
 int	Float::getPrecision(void) const
 {
-	eOperandType precision = INT32;
+	eOperandType precision = FLOAT;
 	return precision;
 }
 
 eOperandType Float::getType(void) const
 {
-	return ::FLOAT;
+	return this->_type;
 }
 
 std::string const & Float::toString( void ) const
@@ -57,66 +59,51 @@ IOperand const * Float::operator+(IOperand const & rhs) const
 	
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-
-	std::cout << "adding\n";	
-	long double result = a + b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return fact.createOperand(newType, std::to_string(static_cast<float_t>(result)));	
+	return fact.createOperand(newType, std::to_string(a + b));
 }
 
 IOperand const * Float::operator-(IOperand const & rhs) const
 {
 	eOperandType	newType;
 	OperandFactory	fact;
-
+	
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-
-	std::cout << "subtracting\n";	
-	long double result = a - b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return fact.createOperand(newType, std::to_string(static_cast<float_t>(result)));
+	return fact.createOperand(newType, std::to_string(a - b));
 }
 IOperand const * Float::operator*(IOperand const & rhs) const
 {
 	eOperandType	newType;
 	OperandFactory	fact;
-
+	
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-
-	std::cout << "multiplying\n";	
-	long double result = a * b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return fact.createOperand(newType, std::to_string(static_cast<float_t>(result)));
+	return fact.createOperand(newType, std::to_string(a * b));
 }
 
 IOperand const * Float::operator/(IOperand const & rhs) const
 {
 	eOperandType	newType;
 	OperandFactory	fact;
-
+	
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-
-	std::cout << "dividing\n";	
-	long double result = a / b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return fact.createOperand(newType, std::to_string(static_cast<float_t>(result)));
+	return fact.createOperand(newType, std::to_string(a / b));
 }
 
 IOperand const * Float::operator%(IOperand const & rhs) const
 {
 	eOperandType	newType;
 	OperandFactory	fact;
-
+	
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-
-	std::cout << "modding\n";	
-	long double result = std::fmod(a, b);
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return fact.createOperand(newType, std::to_string(static_cast<float_t>(result)));
+	return fact.createOperand(newType, std::to_string(std::fmod(a, b)));
 }
 
 Float & Float::operator=(Float const & src)
