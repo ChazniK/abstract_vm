@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:17:59 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/06 22:31:49 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/08 20:11:05 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #define INT8_HPP
 
 #include "IOperand.hpp"
+#include "OperandFactory.hpp"
+
 #include <iostream>
 #include <string>
 #include <sstream>

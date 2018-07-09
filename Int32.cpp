@@ -6,13 +6,11 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 16:03:19 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/08 17:54:24 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/08 21:02:43 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Int32.hpp"
-#include "OperandFactory.hpp"
-#include <cmath>
 
 Int32::Int32(void)
 {
@@ -55,61 +53,70 @@ std::string const & Int32::toString( void ) const
 IOperand const * Int32::operator+(IOperand const & rhs) const
 {
 	eOperandType	newType;
+	OperandFactory	fact;
+	
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
 
 	std::cout << "adding\n";	
 	long double result = a + b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return checkOperand(newType, result);	
+	return fact.createOperand(newType, std::to_string(static_cast<int32_t>(result)));	
 }
 
 IOperand const * Int32::operator-(IOperand const & rhs) const
 {
 	eOperandType	newType;
+	OperandFactory	fact;
+
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
 
 	std::cout << "subtracting\n";	
 	long double result = a - b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return checkOperand(newType, result);
+	return fact.createOperand(newType, std::to_string(static_cast<int32_t>(result)));
 }
 IOperand const * Int32::operator*(IOperand const & rhs) const
 {
 	eOperandType	newType;
+	OperandFactory	fact;
+
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
 
 	std::cout << "multiplying\n";	
 	long double result = a * b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return checkOperand(newType, result);
+	return fact.createOperand(newType, std::to_string(static_cast<int32_t>(result)));
 }
 
 IOperand const * Int32::operator/(IOperand const & rhs) const
 {
 	eOperandType	newType;
+	OperandFactory	fact;
+
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
 
 	std::cout << "dividing\n";	
 	long double result = a / b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return checkOperand(newType, result);
+	return fact.createOperand(newType, std::to_string(static_cast<int32_t>(result)));
 }
 
 IOperand const * Int32::operator%(IOperand const & rhs) const
 {
 	eOperandType	newType;
+	OperandFactory	fact;
+
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
 
 	std::cout << "modding\n";	
 	long double result = std::fmod(a, b);
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return checkOperand(newType, result);
-
+	return fact.createOperand(newType, std::to_string(static_cast<int32_t>(result)));
 }
 
 Int32 & Int32::operator=(Int32 const & src)
@@ -142,16 +149,16 @@ Int32 & Int32::operator=(Int32 const & src)
 // 	}
 // 	else if (newType == INT16)
 // 	{
-// 		if (result < std::numeric_limits<int16_t>::min())
+// 		if (result < std::numeric_limits<int32_t>::min())
 // 		{
 // 			std::cout << "Underflow error" << std::endl;
 // 		}
-// 		else if ( result > std::numeric_limits<int16_t>::max())
+// 		else if ( result > std::numeric_limits<int32_t>::max())
 // 		{
 // 			std::cout << "Overflow error" << std::endl;
 // 		}
 // 		else
-// 			return fact.createOperand(INT16, std::to_string(static_cast<int16_t>(result)));
+// 			return fact.createOperand(INT16, std::to_string(static_cast<int32_t>(result)));
 // 	}
 // 	else if (newType == INT32)
 // 	{

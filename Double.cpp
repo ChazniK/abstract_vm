@@ -6,12 +6,11 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:21:00 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/08 14:42:57 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/08 21:08:57 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Double.hpp"
-#include "OperandFactory.hpp"
 
 Double::Double(void)
 {
@@ -53,56 +52,71 @@ std::string const & Double::toString( void ) const
 
 IOperand const * Double::operator+(IOperand const & rhs) const
 {
-	OperandFactory fact;
-	long double a = std::stold(this->_value);
+	eOperandType	newType;
+	OperandFactory	fact;
+	
+	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-	std::cout << "adding\n";
+
+	std::cout << "adding\n";	
 	long double result = a + b;
-	std::cout << "converting\n";
-	return fact.createOperand(DOUBLE, std::to_string(static_cast<double_t>(result)));
+	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
+	return fact.createOperand(newType, std::to_string(static_cast<double_t>(result)));	
 }
 
 IOperand const * Double::operator-(IOperand const & rhs) const
-{	
-	OperandFactory fact;
-	long double a = std::stold(this->_value);
+{
+	eOperandType	newType;
+	OperandFactory	fact;
+
+	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-	std::cout << "sub\n";
+
+	std::cout << "subtracting\n";	
 	long double result = a - b;
-	std::cout << "converting\n";
-	return fact.createOperand(DOUBLE, std::to_string(static_cast<double_t>(result)));
+	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
+	return fact.createOperand(newType, std::to_string(static_cast<double_t>(result)));
 }
 IOperand const * Double::operator*(IOperand const & rhs) const
 {
-	OperandFactory fact;
-	long double a = std::stold(this->_value);
+	eOperandType	newType;
+	OperandFactory	fact;
+
+	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-	std::cout << "mul\n";
+
+	std::cout << "multiplying\n";	
 	long double result = a * b;
-	std::cout << "converting\n";
-	return fact.createOperand(DOUBLE, std::to_string(static_cast<double_t>(result)));
+	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
+	return fact.createOperand(newType, std::to_string(static_cast<double_t>(result)));
 }
 
 IOperand const * Double::operator/(IOperand const & rhs) const
 {
-	OperandFactory fact;
-	long double a = std::stold(this->_value);
+	eOperandType	newType;
+	OperandFactory	fact;
+
+	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-	std::cout << "div\n";
+
+	std::cout << "dividing\n";	
 	long double result = a / b;
-	std::cout << "converting\n";
-	return fact.createOperand(DOUBLE, std::to_string(static_cast<double_t>(result)));
+	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
+	return fact.createOperand(newType, std::to_string(static_cast<double_t>(result)));
 }
 
 IOperand const * Double::operator%(IOperand const & rhs) const
 {
-	OperandFactory fact;
-	long double a = std::stold(this->_value);
+	eOperandType	newType;
+	OperandFactory	fact;
+
+	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-	std::cout << "mod\n";
+
+	std::cout << "modding\n";	
 	long double result = std::fmod(a, b);
-	std::cout << "converting\n";
-	return fact.createOperand(DOUBLE, std::to_string(static_cast<double_t>(result)));
+	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
+	return fact.createOperand(newType, std::to_string(static_cast<double_t>(result)));
 }
 
 Double & Double::operator=(Double const & src)

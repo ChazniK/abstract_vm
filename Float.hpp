@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:20:37 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/06 22:26:21 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/08 21:06:08 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 #define FLOAT_HPP
 
 #include "IOperand.hpp"
+#include "OperandFactory.hpp"
+
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <cmath>
+
 
 class Float: public IOperand
 {

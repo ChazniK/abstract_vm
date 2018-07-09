@@ -6,17 +6,14 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:35:56 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/08 16:07:28 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/08 20:05:44 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef IOPERAND_HPP
 #define IOPERAND_HPP
 
-#include <string>
-
 enum	eOperandType { INT8, INT16, INT32, FLOAT, DOUBLE };
-// enum	eOperand { int8_t, int16_t, int32_t, float_t, double_t };
  
 class IOperand {
 

@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 15:47:12 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/08 16:59:43 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/08 20:27:39 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #define INT32_HPP
 
 #include "IOperand.hpp"
+#include "OperandFactory.hpp"
+
 #include <iostream>
 #include <string>
 #include <sstream>

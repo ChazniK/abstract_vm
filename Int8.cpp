@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:08:52 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/08 18:27:41 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/08 20:15:09 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ Int8::~Int8(void)
 
 int	Int8::getPrecision(void) const
 {
-	eOperandType precision = Int8;
+	eOperandType precision = INT8;
 	return precision;
 }
 
@@ -53,60 +53,70 @@ std::string const & Int8::toString(void) const
 IOperand const * Int8::operator+(IOperand const & rhs) const
 {
 	eOperandType	newType;
+	OperandFactory	fact;
+	
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
 
 	std::cout << "adding\n";	
 	long double result = a + b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return checkOperand(newType, result);	
+	return fact.createOperand(newType, std::to_string(static_cast<int8_t>(result)));	
 }
 
 IOperand const * Int8::operator-(IOperand const & rhs) const
 {
 	eOperandType	newType;
+	OperandFactory	fact;
+
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
 
 	std::cout << "subtracting\n";	
 	long double result = a - b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return checkOperand(newType, result);
+	return fact.createOperand(newType, std::to_string(static_cast<int8_t>(result)));
 }
 IOperand const * Int8::operator*(IOperand const & rhs) const
 {
 	eOperandType	newType;
+	OperandFactory	fact;
+
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
 
 	std::cout << "multiplying\n";	
 	long double result = a * b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return checkOperand(newType, result);
+	return fact.createOperand(newType, std::to_string(static_cast<int8_t>(result)));
 }
 
 IOperand const * Int8::operator/(IOperand const & rhs) const
 {
 	eOperandType	newType;
+	OperandFactory	fact;
+
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
 
 	std::cout << "dividing\n";	
 	long double result = a / b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return checkOperand(newType, result);
+	return fact.createOperand(newType, std::to_string(static_cast<int8_t>(result)));
 }
 
 IOperand const * Int8::operator%(IOperand const & rhs) const
 {
 	eOperandType	newType;
+	OperandFactory	fact;
+
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
 
 	std::cout << "modding\n";	
 	long double result = std::fmod(a, b);
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return checkOperand(newType, result);
+	return fact.createOperand(newType, std::to_string(static_cast<int8_t>(result)));
 
 }
 
