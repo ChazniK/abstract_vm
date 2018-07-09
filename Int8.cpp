@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:08:52 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/08 20:15:09 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/09 15:59:27 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@ Int8::Int8(Int8 const & src)
 	std::cout << "Int8 copy constructor called " << src.toString() << std::endl;
 }
 
+//Still need to implement exception handling for overflow/underflow
 Int8::Int8(const std::string numAsString, eOperandType type)
 {
-	this->_value = numAsString;
+	long double t = stold(numAsString);
+	int8_t temp = static_cast<int8_t>(t);
+	this->_value = std::to_string(temp);
 	this->_type = type;
-	std::cout << "Constructor with type Int8 - value: " << numAsString <<" type: " << type << std::endl;
+	std::cout << "Constructor with of type: " << type << " value: " << numAsString << std::endl;
 }
 
 Int8::~Int8(void)
@@ -42,7 +45,7 @@ int	Int8::getPrecision(void) const
 
 eOperandType Int8::getType(void) const
 {
-	return ::INT8;
+	return this->_type;
 }
 
 std::string const & Int8::toString(void) const
@@ -57,11 +60,8 @@ IOperand const * Int8::operator+(IOperand const & rhs) const
 	
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-
-	std::cout << "adding\n";	
-	long double result = a + b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return fact.createOperand(newType, std::to_string(static_cast<int8_t>(result)));	
+	return fact.createOperand(newType, std::to_string(a + b));	
 }
 
 IOperand const * Int8::operator-(IOperand const & rhs) const
@@ -71,11 +71,8 @@ IOperand const * Int8::operator-(IOperand const & rhs) const
 
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-
-	std::cout << "subtracting\n";	
-	long double result = a - b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return fact.createOperand(newType, std::to_string(static_cast<int8_t>(result)));
+	return fact.createOperand(newType, std::to_string(a - b));	
 }
 IOperand const * Int8::operator*(IOperand const & rhs) const
 {
@@ -84,11 +81,8 @@ IOperand const * Int8::operator*(IOperand const & rhs) const
 
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-
-	std::cout << "multiplying\n";	
-	long double result = a * b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return fact.createOperand(newType, std::to_string(static_cast<int8_t>(result)));
+	return fact.createOperand(newType, std::to_string(a * b));	
 }
 
 IOperand const * Int8::operator/(IOperand const & rhs) const
@@ -98,11 +92,8 @@ IOperand const * Int8::operator/(IOperand const & rhs) const
 
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-
-	std::cout << "dividing\n";	
-	long double result = a / b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return fact.createOperand(newType, std::to_string(static_cast<int8_t>(result)));
+	return fact.createOperand(newType, std::to_string(a / b));	
 }
 
 IOperand const * Int8::operator%(IOperand const & rhs) const
@@ -112,12 +103,8 @@ IOperand const * Int8::operator%(IOperand const & rhs) const
 
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-
-	std::cout << "modding\n";	
-	long double result = std::fmod(a, b);
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return fact.createOperand(newType, std::to_string(static_cast<int8_t>(result)));
-
+	return fact.createOperand(newType, std::to_string(std::fmod(a, b)));	
 }
 
 Int8 & Int8::operator=(Int8 const & src)
