@@ -6,13 +6,11 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 16:30:26 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/09 15:20:50 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/09 15:46:03 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "OperandFactory.hpp"
-#include <limits>
-#include <cfloat>
 
 OperandFactory::OperandFactory(void)
 {

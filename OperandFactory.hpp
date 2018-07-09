@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 16:30:34 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/09 15:17:34 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/09 15:44:37 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 #define OPERAND_FACTORY
 
 #include "IOperand.hpp"
-
 #include "Int8.hpp"
 #include "Int16.hpp"
 #include "Int32.hpp"
 #include "Float.hpp"
 #include "Double.hpp"
 
-#include <cstdint>
 #include <iostream>
 
 class OperandFactory
@@ -29,10 +27,13 @@ class OperandFactory
 	public:
 		
 		OperandFactory(void);
+		OperandFactory(OperandFactory & src);
 		~OperandFactory(void);
+
 		IOperand const * createOperand(eOperandType type, std::string const & value) const;
 		IOperand const * (OperandFactory::*funct[5])(std::string const & value) const;
 
+		OperandFactory & operator=(OperandFactory const & src);
 
 	private:
 
