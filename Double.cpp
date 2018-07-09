@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:21:00 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/08 21:08:57 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/09 16:49:42 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,18 @@ Double::Double(void)
 	std::cout << "Double constructor called" << std::endl;
 }
 
+Double::Double(const std::string numAsString, eOperandType type)
+{
+	long double val = stold(numAsString);
+	double_t temp = static_cast<double_t>(val);
+	this->_value = std::to_string(temp);
+	this->_type = type;
+	std::cout << "Constructor with of type: " << type << " value: " << numAsString << std::endl;
+}
+
 Double::Double(Double const & src)
 {
 	std::cout << "Double copy constructor called " << src.toString() << std::endl;
-}
-
-Double::Double(const std::string numAsString, eOperandType type)
-{
-	this->_value = numAsString;
-	this->_type = type;
-	std::cout << "Constructor with type Double - value: " << numAsString << "type: " << type << std::endl;
 }
 
 Double::~Double(void)
@@ -36,7 +38,7 @@ Double::~Double(void)
 
 int	Double::getPrecision(void) const
 {
-	eOperandType precision = INT32;
+	eOperandType precision = DOUBLE;
 	return precision;
 }
 
@@ -57,66 +59,52 @@ IOperand const * Double::operator+(IOperand const & rhs) const
 	
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-
-	std::cout << "adding\n";	
-	long double result = a + b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return fact.createOperand(newType, std::to_string(static_cast<double_t>(result)));	
+	return fact.createOperand(newType, std::to_string(a + b));
 }
 
 IOperand const * Double::operator-(IOperand const & rhs) const
 {
 	eOperandType	newType;
 	OperandFactory	fact;
-
+	
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-
-	std::cout << "subtracting\n";	
-	long double result = a - b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return fact.createOperand(newType, std::to_string(static_cast<double_t>(result)));
+	return fact.createOperand(newType, std::to_string(a - b));
 }
+
 IOperand const * Double::operator*(IOperand const & rhs) const
 {
 	eOperandType	newType;
 	OperandFactory	fact;
-
+	
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-
-	std::cout << "multiplying\n";	
-	long double result = a * b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return fact.createOperand(newType, std::to_string(static_cast<double_t>(result)));
+	return fact.createOperand(newType, std::to_string(a * b));
 }
 
 IOperand const * Double::operator/(IOperand const & rhs) const
 {
 	eOperandType	newType;
 	OperandFactory	fact;
-
+	
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-
-	std::cout << "dividing\n";	
-	long double result = a / b;
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return fact.createOperand(newType, std::to_string(static_cast<double_t>(result)));
+	return fact.createOperand(newType, std::to_string(a / b));
 }
 
 IOperand const * Double::operator%(IOperand const & rhs) const
 {
 	eOperandType	newType;
 	OperandFactory	fact;
-
+	
 	long double a = std::stold(toString());
 	long double b = std::stold(rhs.toString());
-
-	std::cout << "modding\n";	
-	long double result = std::fmod(a, b);
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
-	return fact.createOperand(newType, std::to_string(static_cast<double_t>(result)));
+	return fact.createOperand(newType, std::to_string(std::fmod(a, b)));
 }
 
 Double & Double::operator=(Double const & src)

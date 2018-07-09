@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:20:37 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/08 21:07:42 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/09 16:45:38 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 #include <iostream>
 #include <string>
-#include <sstream>
 #include <cmath>
 
 class Double: public IOperand
@@ -26,8 +25,8 @@ class Double: public IOperand
 	public:
 
 		Double(void);
-		Double(Double const & src);
 		Double(const std::string numAsString, eOperandType type);
+		Double(Double const & src);
 		~Double(void);
 
 		virtual int	getPrecision(void) const;
