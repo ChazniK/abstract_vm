@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 09:05:16 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/11 15:20:38 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/11 18:49:27 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,18 @@ void    Lexer::readFromStdin(void)
 			continue;
 		std::istringstream is(line);
 		std::vector<std::string> tokens;
-		while (is >> token)
+		while (is >> std::skipws >> token)
 		{ 
-			if (token.compare(0, 1, ";") == 0)
+			if (token.compare(0, 1, ";") == 0 && token.compare(0, 2, ";;") != 0)
 				break;
 			tokens.push_back(token);
 		}
-		listOfTokens.push_back(tokens);
-		if (token == ";;")
-			break;
+		if (!tokens.empty())
+		{
+			listOfTokens.push_back(tokens);
+			if (tokens[0].compare(0, 2, ";;") == 0)
+				break;
+		}
    	}
 	setListOfTokens(listOfTokens);
 }
@@ -74,7 +77,6 @@ void    Lexer::readFromStdin(void)
 void	Lexer::readFromFile(std::string fileName)
 {
 	std::string line;
-	std::string token;
 	std::vector<std::vector<std::string> > listOfTokens;
 	std::ifstream input(fileName);
 	
@@ -84,19 +86,25 @@ void	Lexer::readFromFile(std::string fileName)
 	}
    	else
 	{
+		
 		while (getline(input, line, '\n'))
 		{
+			std::string token;
+			std::vector<std::string> tokens;
+
 			if (line == "")
 				continue;
 			std::istringstream is(line);
-			std::vector<std::string> tokens;
 			while (is >> token)
 			{
 				if (token.compare(0, 1, ";") == 0)
 					break;
 				tokens.push_back(token);
 			}
-			listOfTokens.push_back(tokens);
+			if (!tokens.empty())
+			{
+				listOfTokens.push_back(tokens);
+			}
 		}
 	}
 	setListOfTokens(listOfTokens);
