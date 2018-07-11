@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Lexer.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 09:05:16 by ckatz             #+#    #+#             */
-/*   Updated: 2018/06/29 09:19:15 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/11 15:20:38 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,14 @@ void    Lexer::readFromStdin(void)
 	
 	while (getline(std::cin, line, '\n'))
 	{
+		if (line == "")
+			continue;
 		std::istringstream is(line);
 		std::vector<std::string> tokens;
 		while (is >> token)
 		{ 
+			if (token.compare(0, 1, ";") == 0)
+				break;
 			tokens.push_back(token);
 		}
 		listOfTokens.push_back(tokens);
@@ -82,10 +86,14 @@ void	Lexer::readFromFile(std::string fileName)
 	{
 		while (getline(input, line, '\n'))
 		{
+			if (line == "")
+				continue;
 			std::istringstream is(line);
 			std::vector<std::string> tokens;
 			while (is >> token)
 			{
+				if (token.compare(0, 1, ";") == 0)
+					break;
 				tokens.push_back(token);
 			}
 			listOfTokens.push_back(tokens);
