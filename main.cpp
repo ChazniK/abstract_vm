@@ -6,11 +6,12 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 12:54:56 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/11 18:10:53 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/12 11:10:02 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Lexer.hpp"
+#include "Parser.hpp"
 #include "Int8.hpp"
 #include "Int16.hpp"
 #include "Int32.hpp"
@@ -22,14 +23,8 @@ int		main(int argc, char **argv)
 	Lexer		inputLexer;
 	// Parser		inputParser;
 	std::vector<std::vector<std::string> > listOfTokens;
-	// IOperand		* test =  new Double("15.01", DOUBLE);
-	// IOperand		* test2 = new Double("10.32", DOUBLE);
+	std::vector<Parser> listOfCommands;
 	
-	// IOperand const * result = *test - *test2;
-
-	// std::cout << result->toString() << std::endl;
-	// std::cout << result->getType() << std::endl;
-
 	// Read in instructions from the std::in
 	if (argc == 1)
 	{
@@ -45,18 +40,34 @@ int		main(int argc, char **argv)
 	else
 		std::cout << "Incorrect number of arguements entered" << std::endl;
 	listOfTokens = inputLexer.getListOfTokens();
-		
+
+	//Run the vm
 	int i = 0; 
 	while (i < (int)listOfTokens.size())
 	{
+		Parser parse;
 		int j = 0;
 		while (j < (int)listOfTokens[i].size())
 		{
-			std::cout << listOfTokens[i][j] << " ";
+			if (j == 0)
+			{
+				parse.setInstruction(parse.extractInstruction(listOfTokens[i][j]));
+			}
 			j++;
-		}	
-		std::cout << "\n";
+		}
+		listOfCommands.push_back(parse);
 		i++;
 	}
+
+	Parser p;
+	listOfCommands[0]
+
+	// int a = 0; 
+	// while (a < (int)listOfCommands.size())
+	// {
+	// 	Parser parse;
+	// 	std::cout << parse.getInstruction() << std::endl;
+	// 	a++;
+	// }
 	return (0);
 }

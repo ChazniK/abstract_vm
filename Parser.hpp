@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   Parser.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckatz <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:56:57 by ckatz             #+#    #+#             */
-/*   Updated: 2018/06/29 11:24:27 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/12 11:03:44 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_HPP
 #define PARSER_HPP
+
+#include "IOperand.hpp"
 
 #include <iostream>
 #include <string>
@@ -26,16 +28,27 @@ class Parser
 		//Parser deconstructor
 		~Parser(void);
 
-		int		isComment(std::string line);
-		int		isCommand(std::string line);
-		int		isValidOperand(std::string line);
-		std::string	getValue(std::string val);
-		//int		isValidExit(std::string line);
+		std::string	extractInstruction(std::string instr) const;
+		std::string	extractType(std::string type) const;
+		std::string	extractValue(std::string val) const;
 
-		//int		singleInstrOnLine(std::string line);
-		//int		validExit(std::string, int fd);	
+		//Getters
+		std::string	getInstruction(void) const;
+		std::string	getType(void) const;
+		std::string	getValue(void) const;
+
+		//Setters
+		void		setInstruction(std::string instruction);
+		void		setType(std::string type);
+		void		setValue(std::string value);
+
+		int			isValidOperand(std::string line);
 
 	private:
+
+		std::string	_instruction;
+		std::string	_type;
+		std::string	_value;
 
 };
 
