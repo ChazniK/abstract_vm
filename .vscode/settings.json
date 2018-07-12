@@ -38,7 +38,15 @@
 		"system_error": "cpp",
 		"type_traits": "cpp",
 		"tuple": "cpp",
-		"utility": "cpp"
+		"utility": "cpp",
+		"__functional_base": "cpp",
+		"__functional_base_03": "cpp",
+		"__tuple": "cpp",
+		"chrono": "cpp",
+		"ratio": "cpp",
+		"iterator": "cpp",
+		"string": "cpp",
+		"string_view": "cpp"
 	},
     "42header.email": "ckatz@student.wethinkcode.co.za",
     "42header.username": "ckatz"

@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:17:32 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/09 16:21:01 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/12 15:45:29 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Int16::Int16(const std::string numAsString, eOperandType type)
 	int16_t temp = static_cast<int16_t>(t);
 	this->_value = std::to_string(temp);
 	this->_type = type;
-	std::cout << "Constructor with of type: " << type << " value: " << numAsString << std::endl;
+	// std::cout << "Constructor with of type: " << type << " value: " << numAsString << std::endl;
 }
 
 Int16::Int16(Int16 const & src)

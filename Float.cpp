@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:21:00 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/09 16:39:29 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/12 16:13:42 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Float::Float(const std::string numAsString, eOperandType type)
 	float_t temp = static_cast<float_t>(t);
 	this->_value = std::to_string(temp);
 	this->_type = type;
-	std::cout << "Constructor with of type: " << type << " value: " << numAsString << std::endl;
+	// std::cout << "Constructor with of type: " << type << " value: " << numAsString << std::endl;
 }
 
 Float::Float(Float const & src)

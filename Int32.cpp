@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 16:03:19 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/09 16:30:09 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/12 16:13:27 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Int32::Int32(const std::string numAsString, eOperandType type)
 	int32_t temp = static_cast<int32_t>(t);
 	this->_value = std::to_string(temp);
 	this->_type = type;
-	std::cout << "Constructor with of type: " << type << " value: " << numAsString << std::endl;
+	// std::cout << "Constructor with of type: " << type << " value: " << numAsString << std::endl;
 }
 
 Int32::Int32(Int32 const & src)
