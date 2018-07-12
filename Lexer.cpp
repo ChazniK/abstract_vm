@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 09:05:16 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/11 18:49:27 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/12 13:42:25 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	Lexer::readFromFile(std::string fileName)
 	}
    	else
 	{
-		
 		while (getline(input, line, '\n'))
 		{
 			std::string token;
