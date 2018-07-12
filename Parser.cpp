@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:57:37 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/12 11:03:41 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/12 14:35:57 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 Parser::Parser(void)
 {
-	std::cout << "Parser constructor called" << std::endl;
+	// std::cout << "Parser constructor called" << std::endl;
 	return;
 }
 
 Parser::~Parser(void)
 {
-	std::cout << "Parser destructor called" << std::endl;
+	// std::cout << "Parser destructor called" << std::endl;
 	return;
 }
 
@@ -80,34 +80,33 @@ std::string	Parser::extractInstruction(std::string currentCommand) const
 	return (command);
 }
 
-std::string	Parser::extractType(std::string type) const
+eOperandType	Parser::extractType(std::string type) const
 {
-	std::string	currentType;
+	eOperandType	currentType;
 
 	if (type.compare(0, 4, "int8") == 0)
 	{
-		currentType = "INT8";
+		currentType = INT8;
 	}
 	else if (type.compare(0, 5, "int16") == 0)
 	{
-		currentType = "INT16";
+		currentType = INT16;
 	}
 	else if (type.compare(0, 5, "int32") == 0)
 	{
-		currentType = "INT32";
+		currentType = INT32;
 	}
 	else if (type.compare(0, 5, "float") == 0)
 	{
-		currentType = "FLOAT";
+		currentType = FLOAT;
 	}
 	else if (type.compare(0, 6, "double") == 0)
 	{
-		currentType = "DOUBLE";
+		currentType = DOUBLE;
 	}
 	else
 	{
 		std::cout << "value not valid" << std::endl;
-		return ("");
 	}
 	return (currentType);
 }
@@ -153,7 +152,7 @@ std::string	Parser::getInstruction(void) const
 	return this->_instruction;
 }
 
-std::string	Parser::getType(void) const
+eOperandType Parser::getType(void) const
 {
 	return this->_type;
 }
@@ -168,7 +167,7 @@ void		Parser::setInstruction(std::string instruction)
 	this->_instruction = instruction;
 }
 
-void		Parser::setType(std::string type)
+void		Parser::setType(eOperandType type)
 {
 	this->_type = type;
 }
