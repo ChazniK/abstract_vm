@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 12:54:56 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/12 17:27:27 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/12 18:00:34 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,45 @@ void	dump(std::vector<IOperand const *>  & vmStack)
 
 void	assert(Parser parse, std::vector<IOperand const *> & vmStack)
 {
-	IOperand const * assertOperand;
+	IOperand const *	assertOperand;
+	long double			parsedVal;
+	long double			assertedVal;	
 
 	assertOperand = vmStack.back();
-	std::cout << assertOperand->toString() << " - " << assertOperand->getType();
-	std::cout << " " << parse.getValue() << " - " << parse.getType() << std::endl;
-	// if ((parse.getType() == assertOperand->getType()) && (parse.getValue() == assertOperand->toString()))
-	// {
-	// 	std::cout << "Values match" << std::endl;
-	// 	std::cout << assertOperand->toString() << " - " << assertOperand->getType();
-	// 	std::cout << " " << parse.getValue() << " - " << parse.getType() << std::endl;
-	// }
-	// else
-	// {
-	// 	std::cout << "Error values do not match" << std::endl;
-	// }
+	parsedVal = std::stold(parse.getValue());
+	assertedVal = std::stold(assertOperand->toString());
+	if ((parse.getType() == assertOperand->getType()) && (parsedVal == assertedVal))
+	{
+		std::cout << "Values match" << std::endl;
+		std::cout << assertOperand->toString() << " - " << assertOperand->getType();
+		std::cout << " " << parse.getValue() << " - " << parse.getType() << std::endl;
+	}
+	else
+	{
+		std::cout << "Error values do not match" << std::endl;
+	}
+}
+
+void	add(std::vector<IOperand const *> & vmStack)
+{
+	IOperand const * val1;
+	IOperand const * val2;
+	IOperand const * result;
+
+	if (vmStack.size() < 2)
+	{
+		std::cout << "Error less than two values on stack" << std::endl;
+	}
+	else
+	{
+		std::cout << "Adding" << std::endl;
+		val1 = vmStack.back();
+		vmStack.pop_back();
+		val2 = vmStack.back();
+		vmStack.pop_back();
+		result = val1 + val2;
+		vmStack.push_back(result);
+	}
 }
 
 void	executeCommand(Parser parse, std::vector<IOperand const *>  & vmStack)
@@ -83,6 +107,10 @@ void	executeCommand(Parser parse, std::vector<IOperand const *>  & vmStack)
 	else if (parse.getInstruction() == "assert")
 	{
 		assert(parse, vmStack);
+	}
+	else if (parse.getInstruction() == "add")
+	{
+		add(vmStack);
 	}
 }
 
