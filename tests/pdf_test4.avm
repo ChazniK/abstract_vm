@@ -1,0 +1,9 @@
+push int8(1)
+push int8(11)
+push int8(111)
+push int8(hello)
+
+
+print
+
+exit

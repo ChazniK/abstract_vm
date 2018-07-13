@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:57:37 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/12 14:35:57 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/13 18:57:26 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ std::string	Parser::extractValue(std::string val) const
 		std::cout << "value not valid" << std::endl;
 		return ("");
 	}
+	if ()
 	return val;
 }
 
