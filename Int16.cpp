@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:17:32 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/12 15:45:29 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/13 12:33:50 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ Int16::Int16(void)
 Int16::Int16(const std::string numAsString, eOperandType type)
 {
 	long double t = stold(numAsString);
+	if (t > INT16_MAX)
+	{
+		std::cout << "Int16 overflow" << std::endl;
+		return;
+	}
+	else if (t < INT16_MIN)
+	{
+		std::cout << "Int16 underflow" << std::endl;
+		return;
+	}
 	int16_t temp = static_cast<int16_t>(t);
 	this->_value = std::to_string(temp);
 	this->_type = type;

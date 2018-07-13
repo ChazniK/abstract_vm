@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:08:52 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/12 15:45:32 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/13 12:34:16 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ Int8::Int8(Int8 const & src)
 Int8::Int8(const std::string numAsString, eOperandType type)
 {
 	long double t = stold(numAsString);
+	if (t > INT8_MAX)
+	{
+		std::cout << "Int8 overflow" << std::endl;
+		return;
+	}
+	else if (t < INT8_MIN)
+	{
+		std::cout << "Int8 underflow" << std::endl;
+		return;
+	}
 	int8_t temp = static_cast<int8_t>(t);
 	this->_value = std::to_string(temp);
 	this->_type = type;

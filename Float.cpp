@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:21:00 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/12 16:13:42 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/13 12:59:54 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ Float::Float(void)
 Float::Float(const std::string numAsString, eOperandType type)
 {
 	long double t = stold(numAsString);
+	if (t > __FLT_MAX__)
+	{
+		std::cout << "Float overflow" << std::endl;
+		return;
+	}
+	else if (t < __FLT_MIN__)
+	{
+		std::cout << "Float underflow" << std::endl;
+		return;
+	}
 	float_t temp = static_cast<float_t>(t);
 	this->_value = std::to_string(temp);
 	this->_type = type;

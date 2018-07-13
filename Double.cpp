@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:21:00 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/12 16:13:49 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/13 13:01:17 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ Double::Double(void)
 Double::Double(const std::string numAsString, eOperandType type)
 {
 	long double val = stold(numAsString);
+	if (val > __DBL_MAX__)
+	{
+		std::cout << "Float overflow" << std::endl;
+		return;
+	}
+	else if (val < __DBL_MIN__)
+	{
+		std::cout << "Float underflow" << std::endl;
+		return;
+	}
 	double_t temp = static_cast<double_t>(val);
 	this->_value = std::to_string(temp);
 	this->_type = type;

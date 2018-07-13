@@ -46,7 +46,9 @@
 		"ratio": "cpp",
 		"iterator": "cpp",
 		"string": "cpp",
-		"string_view": "cpp"
+		"string_view": "cpp",
+		"__locale": "cpp",
+		"__split_buffer": "cpp"
 	},
     "42header.email": "ckatz@student.wethinkcode.co.za",
     "42header.username": "ckatz"
