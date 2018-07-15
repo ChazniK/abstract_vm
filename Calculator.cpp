@@ -1,4 +1,5 @@
 #include "Calculator.hpp"
+#include "Error.hpp"
 
 Calculator::Calculator(void)
 {
@@ -21,7 +22,7 @@ void	Calculator::push(Parser parse, std::vector<IOperand const *> & vmStack)
 	IOperand const * newOperand;
 
 	newOperand = fact.createOperand(parse.getType(), parse.getValue());
-	std::cout << "Creating " << newOperand->getType() << " - " << newOperand->toString() << std::endl;
+	// std::cout << "Creating " << newOperand->getType() << " - " << newOperand->toString() << std::endl;
 	vmStack.push_back(newOperand);	
 }
 
@@ -36,7 +37,7 @@ void	Calculator::pop(Parser parse, std::vector<IOperand const *> & vmStack)
 		vmStack.pop_back();
 	}
 	else
-		std::cout << "Error, pop on empty stack" << std::endl;
+		throw Error::EmtyStackException();
 }
 
 void	Calculator::dump(std::vector<IOperand const *> & vmStack)
@@ -49,7 +50,7 @@ void	Calculator::dump(std::vector<IOperand const *> & vmStack)
 		}
 	}
 	else
-		std::cout << "Dump on empty stack" << std::endl;
+		throw Error::EmtyStackException();
 }
 
 void	Calculator::assert(Parser parse, std::vector<IOperand const *> & vmStack)
@@ -64,16 +65,13 @@ void	Calculator::assert(Parser parse, std::vector<IOperand const *> & vmStack)
 		parsedVal = std::stold(parse.getValue());
 		assertedVal = std::stold(assertOperand->toString());
 		if ((parse.getType() == assertOperand->getType()) && (parsedVal == assertedVal))
-		{
-			
+		{			
 		}
 		else
-		{
-			std::cout << "Error values do not match" << std::endl;
-		}
+			throw Error::FalseAssertException();
 	}
 	else
-		std::cout << "Assert on empty stack" << std::endl;
+		throw Error::EmtyStackException();
 }
 
 void	Calculator::add(std::vector<IOperand const *> & vmStack)
@@ -83,7 +81,7 @@ void	Calculator::add(std::vector<IOperand const *> & vmStack)
 
 	if (vmStack.size() < 2)
 	{
-		std::cout << "Error less than two values on stack" << std::endl;
+		throw Error::TooFewValuesException();
 	}
 	else
 	{
@@ -102,7 +100,7 @@ void	Calculator::sub(std::vector<IOperand const *> & vmStack)
 
 	if (vmStack.size() < 2)
 	{
-		std::cout << "Error less than two values on stack" << std::endl;
+		throw Error::TooFewValuesException();	
 	}
 	else
 	{
@@ -121,7 +119,7 @@ void	Calculator::mul(std::vector<IOperand const *> & vmStack)
 
 	if (vmStack.size() < 2)
 	{
-		std::cout << "Error less than two values on stack" << std::endl;
+		throw Error::TooFewValuesException();	
 	}
 	else
 	{
@@ -140,7 +138,7 @@ void	Calculator::div(std::vector<IOperand const *> & vmStack)
 
 	if (vmStack.size() < 2)
 	{
-		std::cout << "Error less than two values on stack" << std::endl;
+		throw Error::TooFewValuesException();
 	}
 	else
 	{
@@ -150,7 +148,7 @@ void	Calculator::div(std::vector<IOperand const *> & vmStack)
 		vmStack.pop_back();
 		if (val1->toString() == "0")
 		{
-			std::cout << "Divsion by 0 not possible" << std::endl;
+			throw Error::DivisionModuloByZeroException();
 		}
 		else
 			vmStack.push_back(*val2 / *val1);
@@ -164,7 +162,7 @@ void	Calculator::mod(std::vector<IOperand const *> & vmStack)
 
 	if (vmStack.size() < 2)
 	{
-		std::cout << "Error less than two values on stack" << std::endl;
+		throw Error::TooFewValuesException();
 	}
 	else
 	{
@@ -172,7 +170,12 @@ void	Calculator::mod(std::vector<IOperand const *> & vmStack)
 		vmStack.pop_back();
 		val2 = vmStack.back();
 		vmStack.pop_back();
-		vmStack.push_back(*val2 % *val1);
+		if (val1->toString() == "0")
+		{
+			throw Error::DivisionModuloByZeroException();
+		}
+		else
+			vmStack.push_back(*val2 % *val1);
 	}
 }
 
@@ -185,7 +188,6 @@ void	Calculator::print(std::vector<IOperand const *> & vmStack)
 	if (vmStack.size() > 0)
 	{
 		assertedVal = vmStack.back();
-		std::cout << assertedVal->getType() << " - " << assertedVal->toString() << std::endl;
 		if (assertedVal->getType() == INT8)
 		{
 			convertedAssert = stold(assertedVal->toString());
@@ -194,12 +196,10 @@ void	Calculator::print(std::vector<IOperand const *> & vmStack)
 			std::cout << valAsChar << std::endl;
 		}
 		else
-		{
-			std::cout << "Error value is not of type int8" << std::endl;
-		}
+			throw Error::FalseAssertException();
 	}
 	else
-		std::cout << "Error print on empty stack" << std::endl;
+		throw Error::EmtyStackException();
 }
 
 // void	Calculator::exit(void)
@@ -251,10 +251,11 @@ void	Calculator::executeCommand(Parser parse, std::vector<IOperand const *> & vm
 	}
 	else if (parse.getInstruction() == "exit")
 	{
-		std::cout << "Exiting" << std::endl;
 	}
 	else if (parse.getInstruction() == ";;")
 	{
-
+		std::cout << "Done reading from the std::in" << std::endl;
 	}
+	else
+		throw Error::UnknownInstructionException();
 }

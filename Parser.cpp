@@ -6,11 +6,12 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:57:37 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/13 18:57:26 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/15 16:36:16 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Parser.hpp"
+#include "Error.hpp"
 
 Parser::Parser(void)
 {
@@ -24,7 +25,7 @@ Parser::~Parser(void)
 	return;
 }
 
-std::string	Parser::extractInstruction(std::string currentCommand) const
+std::string	Parser::extractInstruction(std::string currentCommand)
 {
 	std::string command;
 
@@ -71,11 +72,15 @@ std::string	Parser::extractInstruction(std::string currentCommand) const
 	else if (currentCommand == "exit")
 	{
 		command = currentCommand;
+		exitFound = 1;	
+	}
+	else if (currentCommand == ";;")
+	{
+		std::cout << "End of program read from std::in" << std::endl;
 	}
 	else
 	{
-		std::cout << "Command not found" << std::endl;
-		return ("");
+		throw Error::UnknownInstructionException();
 	}
 	return (command);
 }
@@ -106,7 +111,7 @@ eOperandType	Parser::extractType(std::string type) const
 	}
 	else
 	{
-		std::cout << "value not valid" << std::endl;
+		throw Error::InvalidOperandException();
 	}
 	return (currentType);
 }
@@ -144,7 +149,6 @@ std::string	Parser::extractValue(std::string val) const
 		std::cout << "value not valid" << std::endl;
 		return ("");
 	}
-	if ()
 	return val;
 }
 

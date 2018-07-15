@@ -25,9 +25,9 @@ class Calculator
 	void	mod(std::vector<IOperand const *> & vmStack);
 	void	print(std::vector<IOperand const *> & vmStack);
 	void	executeCommand(Parser parse, std::vector<IOperand const *> & vmStack);
-	// void	exit(void);
 
 	Calculator & operator=(Calculator const & src);
+
 };
 
 #endif

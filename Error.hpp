@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 12:00:06 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/15 13:23:23 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/15 16:03:04 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ class Error
 				virtual const char* what() const throw()
 				{
 					return ("Error, unknown instruction entered");
+				}
+		};
+
+		class InvalidOperandException: public std::exception
+		{
+			public:
+				virtual const char* what() const throw()
+				{
+					return ("Error, unknown operand entered");
 				}
 		};
 		
@@ -46,12 +55,12 @@ class Error
 				}
 		};
 
-		class PopOnEmtyStackException: public std::exception
+		class EmtyStackException: public std::exception
 		{
 			public:
 				virtual const char* what() const throw()
 				{
-					return ("Error, pop on empty stack");
+					return ("Error, stack is empty");
 				}
 		};
 
