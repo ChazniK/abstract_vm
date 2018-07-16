@@ -1,7 +1,0 @@
-push int8(1)
-add
-div
-mul
-sub
-mod
-exit

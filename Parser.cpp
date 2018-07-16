@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:57:37 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/16 05:45:28 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/16 17:40:59 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,72 +16,75 @@
 
 Parser::Parser(void)
 {
-	// std::cout << "Parser constructor called" << std::endl;
-	return;
+	
+}
+
+Parser::Parser(Parser const & src)
+{
+	src.getType();
 }
 
 Parser::~Parser(void)
 {
-	// std::cout << "Parser destructor called" << std::endl;
-	return;
+	
 }
 
 std::string	Parser::extractInstruction(std::string currentCommand)
 {
-	std::string command = "";
+	std::string command;
 
-	if (currentCommand == "push")
-	{
-		command = currentCommand;
-	}
-	else if (currentCommand == "pop")
-	{
-		command = currentCommand;
-	}
-	else if (currentCommand == "dump")
-	{
-		command = currentCommand;
-	}
-	else if (currentCommand == "assert")
-	{
-		command = currentCommand;
-	}
-	else if (currentCommand == "add")
-	{
-		command = currentCommand;
-	}
-	else if (currentCommand == "sub")
-	{
-		command = currentCommand;
-	}
-	else if (currentCommand == "mul")
-	{
-		command = currentCommand;
-	}
-	else if (currentCommand == "div")
-	{
-		command = currentCommand;
-	}
-	else if (currentCommand == "mod")
-	{
-		command = currentCommand;
-	}
-	else if (currentCommand == "print")
-	{
-		command = currentCommand;
-	}
-	else if (currentCommand == "exit")
-	{
-		command = currentCommand;
-		exitFound = 1;	
-	}
-	else if (currentCommand == ";;")
-	{
-		std::cout << "End of program read from std::in" << std::endl;
-	}
 	try
 	{
-		if (command == "")
+		if (currentCommand == "push")
+		{
+			command = currentCommand;
+		}
+		else if (currentCommand == "pop")
+		{
+			command = currentCommand;
+		}
+		else if (currentCommand == "dump")
+		{
+			command = currentCommand;
+		}
+		else if (currentCommand == "assert")
+		{
+			command = currentCommand;
+		}
+		else if (currentCommand == "add")
+		{
+			command = currentCommand;
+		}
+		else if (currentCommand == "sub")
+		{
+			command = currentCommand;
+		}
+		else if (currentCommand == "mul")
+		{
+			command = currentCommand;
+		}
+		else if (currentCommand == "div")
+		{
+			command = currentCommand;
+		}
+		else if (currentCommand == "mod")
+		{
+			command = currentCommand;
+		}
+		else if (currentCommand == "print")
+		{
+			command = currentCommand;
+		}
+		else if (currentCommand == "exit")
+		{
+			command = currentCommand;
+			exitFound = 1;	
+		}
+		else if (currentCommand == ";;")
+		{
+			command = currentCommand;
+		}
+		else
 		{
 			throw Error::UnknownInstructionException();
 		}
@@ -217,4 +220,13 @@ void		Parser::setType(eOperandType type)
 void		Parser::setValue(std::string value)
 {
 	this->_value = value;
+}
+
+Parser & Parser::operator=(Parser const & src)
+{
+	this->_instruction = src.getInstruction();
+	this->_type = src.getType();
+	this->_value = src.getValue();
+
+	return *this;
 }

@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 16:30:34 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/16 14:31:44 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/16 17:10:00 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,10 @@ class OperandFactory
 	public:
 		
 		OperandFactory(void);
-		OperandFactory(OperandFactory & src);
 		~OperandFactory(void);
 
 		IOperand const * createOperand(eOperandType type, std::string const & value) const;
 		IOperand const * (OperandFactory::*funct[5])(std::string const & value) const;
-
-		OperandFactory & operator=(OperandFactory const & src);
 
 	private:
 

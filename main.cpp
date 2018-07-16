@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 12:54:56 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/15 23:33:44 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/16 16:42:14 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ int		main(int argc, char **argv)
 		inputLexer.readFromFile(argv[1]);
 	}
 	else
+	{
 		std::cout << "Incorrect number of arguements entered" << std::endl;
-
+		return (-1);
+	}
 	listOfTokens = inputLexer.getListOfTokens();
 
 	for (int i = 0; i < (int)listOfTokens.size(); i++)
@@ -70,7 +72,7 @@ int		main(int argc, char **argv)
 		std::exit(EXIT_FAILURE);
 	}
 	
-	for (int i = 0; i < listOfCommands.size(); i++)
+	for (int i = 0; i < (int)listOfCommands.size(); i++)
 	{
 		calc.executeCommand(listOfCommands[i], vmStack);
 	}

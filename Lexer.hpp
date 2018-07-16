@@ -26,13 +26,14 @@ class Lexer
 
 		//Constructors
 		Lexer(void);
+		Lexer(Lexer const & src);
 
 		//Deconstructor
 		~Lexer(void);
 
 		// Getters
-		int		getInputType(void);
-		std::vector<std::vector<std::string> >	getListOfTokens(void);
+		int		getInputType(void) const;
+		std::vector<std::vector<std::string> >	getListOfTokens(void) const;
 
 		// Setters
 		void	setInputType(int inputType);
@@ -41,6 +42,8 @@ class Lexer
 		//Functions to read and tokenize file or input from std::in
 		void    readFromStdin(void);
 		void    readFromFile(std::string fileName);
+
+		virtual Lexer & operator=(Lexer const & src);
 
 	private:
 		

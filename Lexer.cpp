@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 09:05:16 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/16 06:06:05 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/16 17:34:46 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,26 @@
 
 Lexer::Lexer(void)
 {
-	std::cout << "Default lexer constructor called" << std::endl;
-	return ;
+
 }
+
+Lexer::Lexer(Lexer const & src)
+{
+	src.getInputType();
+}
+
 
 Lexer::~Lexer(void)
 {
-	std::cout << "Lexer destructor called" << std::endl;
-	return ;
+
 }
 
-int		Lexer::getInputType(void)
+int		Lexer::getInputType(void) const
 {
 	return this->_inputType;
 }
 
-std::vector<std::vector<std::string> >  Lexer::getListOfTokens(void)
+std::vector<std::vector<std::string> >  Lexer::getListOfTokens(void) const
 {
 	return this->_listOfTokens;
 }
@@ -67,7 +71,6 @@ void    Lexer::readFromStdin(void)
 				break;
 			tokens.push_back(token);
 		}
-		// std::cout << "count:" << count << std::endl;
 		try
 		{
 			if (count > 2)
@@ -118,7 +121,6 @@ void	Lexer::readFromFile(std::string fileName)
 				tokens.push_back(token);
 				count++;
 			}
-			// std::cout << "count:" << count << std::endl;
 			try
 			{
 				if (count > 2)
@@ -138,4 +140,12 @@ void	Lexer::readFromFile(std::string fileName)
 		}
 	}
 	setListOfTokens(listOfTokens);
+}
+
+Lexer & Lexer::operator=(Lexer const & src)
+{
+	this->_inputType = src.getInputType();
+	this->_listOfTokens = src.getListOfTokens();
+
+	return *this;
 }

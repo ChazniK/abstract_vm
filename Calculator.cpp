@@ -251,7 +251,6 @@ void	Calculator::print(std::vector<IOperand const *> & vmStack)
 			if (assertedVal->getType() == INT8)
 			{
 				convertedAssert = stold(assertedVal->toString());
-				std::cout << convertedAssert << std::endl;
 				valAsChar = static_cast<char>(convertedAssert);
 				std::cout << valAsChar << std::endl;
 			}
@@ -312,11 +311,10 @@ void	Calculator::executeCommand(Parser parse, std::vector<IOperand const *> & vm
 	}
 	else if (parse.getInstruction() == "exit")
 	{
+		std::exit(EXIT_SUCCESS);
 	}
 	else if (parse.getInstruction() == ";;")
 	{
 		std::cout << "Done reading from the std::in" << std::endl;
 	}
-	else
-		throw Error::UnknownInstructionException();
 }

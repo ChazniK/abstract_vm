@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:08:52 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/16 15:12:37 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/16 16:25:41 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,4 +123,12 @@ IOperand const * Int8::operator%(IOperand const & rhs) const
 	long double b = std::stold(rhs.toString());
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
 	return fact.createOperand(newType, std::to_string(std::fmod(a, b)));	
+}
+
+Int8 & Int8::operator=(Int8 const & src)
+{
+	this->_value = src.toString();
+	this->_type = src.getType();
+
+	return *this;
 }
