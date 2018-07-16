@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:08:52 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/15 22:33:41 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/16 15:12:37 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,9 @@
 
 Int8::Int8(void)
 {
-	std::cout << "Int8 constructor called" << std::endl;
+	
 }
 
-Int8::Int8(Int8 const & src)
-{
-	std::cout << "Int8 copy constructor called " << src.toString() << std::endl;
-}
-
-//Still need to implement exception handling for overflow/underflow
 Int8::Int8(const std::string numAsString, eOperandType type)
 {
 	int t = stold(numAsString);
@@ -54,12 +48,11 @@ Int8::Int8(const std::string numAsString, eOperandType type)
 	int8_t temp = static_cast<int8_t>(t);
 	this->_value = std::to_string(temp);
 	this->_type = type;
-	// std::cout << "Constructor with of type: " << type << " value: " << numAsString << std::endl;
 }
 
 Int8::~Int8(void)
 {
-	std::cout << "Int8 destructor called" << std::endl;
+
 }
 
 int	Int8::getPrecision(void) const
@@ -130,15 +123,4 @@ IOperand const * Int8::operator%(IOperand const & rhs) const
 	long double b = std::stold(rhs.toString());
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
 	return fact.createOperand(newType, std::to_string(std::fmod(a, b)));	
-}
-
-Int8 & Int8::operator=(Int8 const & src)
-{
-	std::cout << "Int8 copy constructor called" << std::endl;
-	if (this != &src)
-	{
-		this->_value = src.toString();
-		this->_type = src.getType();
-	}
-	return *this;
 }
