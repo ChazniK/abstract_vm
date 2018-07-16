@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:21:00 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/15 22:38:52 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/16 15:09:33 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 Float::Float(void)
 {
-	std::cout << "Float constructor called" << std::endl;
+
 }
 
 Float::Float(const std::string numAsString, eOperandType type)
@@ -48,17 +48,11 @@ Float::Float(const std::string numAsString, eOperandType type)
 	float_t temp = static_cast<float_t>(t);
 	this->_value = std::to_string(temp);
 	this->_type = type;
-	// std::cout << "Constructor with of type: " << type << " value: " << numAsString << std::endl;
-}
-
-Float::Float(Float const & src)
-{
-	std::cout << "Float copy constructor called " << src.toString() << std::endl;
 }
 
 Float::~Float(void)
 {
-	std::cout << "Float destructor called" << std::endl;
+
 }
 
 int	Float::getPrecision(void) const
@@ -129,15 +123,4 @@ IOperand const * Float::operator%(IOperand const & rhs) const
 	long double b = std::stold(rhs.toString());
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
 	return fact.createOperand(newType, std::to_string(std::fmod(a, b)));
-}
-
-Float & Float::operator=(Float const & src)
-{
-	std::cout << "Float copy constructor called" << std::endl;
-	if (this != &src)
-	{
-		this->_value = src.toString();
-		this->_type = src.getType();
-	}
-	return *this;
 }
