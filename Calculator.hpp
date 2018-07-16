@@ -11,7 +11,6 @@ class Calculator
   public:
 
 	Calculator(void);
-	Calculator(Calculator const & src);
 	~Calculator(void);
   
   	void	push(Parser parse, std::vector<IOperand const *> & vmStack);
@@ -25,9 +24,6 @@ class Calculator
 	void	mod(std::vector<IOperand const *> & vmStack);
 	void	print(std::vector<IOperand const *> & vmStack);
 	void	executeCommand(Parser parse, std::vector<IOperand const *> & vmStack);
-
-	Calculator & operator=(Calculator const & src);
-
 };
 
 #endif

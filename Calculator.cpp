@@ -6,11 +6,6 @@ Calculator::Calculator(void)
 
 }
 
-Calculator::Calculator(Calculator const & src)
-{
-
-}
-
 Calculator::~Calculator(void)
 {
 
