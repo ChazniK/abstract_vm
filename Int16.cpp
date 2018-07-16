@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:17:32 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/15 22:38:38 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/16 15:14:05 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 Int16::Int16(void)
 {
-	std::cout << "Int16 constructor called" << std::endl;
+
 }
 
 Int16::Int16(const std::string numAsString, eOperandType type)
@@ -48,17 +48,11 @@ Int16::Int16(const std::string numAsString, eOperandType type)
 	int16_t temp = static_cast<int16_t>(t);
 	this->_value = std::to_string(temp);
 	this->_type = type;
-	// std::cout << "Constructor with of type: " << type << " value: " << numAsString << std::endl;
-}
-
-Int16::Int16(Int16 const & src)
-{
-	std::cout << "Int16 copy constructor called " << src.toString() << std::endl;
 }
 
 Int16::~Int16(void)
 {
-	std::cout << "Int16 destructor called" << std::endl;
+
 }
 
 int	Int16::getPrecision(void) const
@@ -130,15 +124,4 @@ IOperand const * Int16::operator%(IOperand const & rhs) const
 	long double b = std::stold(rhs.toString());
 	newType =  (getPrecision() > rhs.getPrecision()) ? getType() : rhs.getType();
 	return fact.createOperand(newType, std::to_string(std::fmod(a, b)));
-}
-
-Int16 & Int16::operator=(Int16 const & src)
-{
-	std::cout << "Int16 copy constructor called" << std::endl;
-	if (this != &src)
-	{
-		this->_value = src.toString();
-		this->_type = src.getType();
-	}
-	return *this;
 }
