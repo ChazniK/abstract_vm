@@ -6,11 +6,12 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 09:05:16 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/12 13:42:25 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/16 06:06:05 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Lexer.hpp"
+#include "Error.hpp"
 
 Lexer::Lexer(void)
 {
@@ -49,7 +50,7 @@ void    Lexer::readFromStdin(void)
 	std::string line;
 	std::string token;
 	std::vector<std::vector<std::string> > listOfTokens;
-	
+
 	std::cout << "Implement reading from the std::in" << std::endl;
 	
 	while (getline(std::cin, line, '\n'))
@@ -58,11 +59,26 @@ void    Lexer::readFromStdin(void)
 			continue;
 		std::istringstream is(line);
 		std::vector<std::string> tokens;
+		int		count = 0;
+
 		while (is >> std::skipws >> token)
 		{ 
 			if (token.compare(0, 1, ";") == 0 && token.compare(0, 2, ";;") != 0)
 				break;
 			tokens.push_back(token);
+		}
+		// std::cout << "count:" << count << std::endl;
+		try
+		{
+			if (count > 2)
+			{
+				throw Error::ParserException();
+			}
+		}
+		catch(std::exception & e)
+		{
+			std::cout << e.what() << std::endl;
+			std::exit(EXIT_FAILURE);
 		}
 		if (!tokens.empty())
 		{
@@ -90,6 +106,7 @@ void	Lexer::readFromFile(std::string fileName)
 		{
 			std::string token;
 			std::vector<std::string> tokens;
+			int		count = 0;
 
 			if (line == "")
 				continue;
@@ -99,6 +116,20 @@ void	Lexer::readFromFile(std::string fileName)
 				if (token.compare(0, 1, ";") == 0)
 					break;
 				tokens.push_back(token);
+				count++;
+			}
+			// std::cout << "count:" << count << std::endl;
+			try
+			{
+				if (count > 2)
+				{
+					throw Error::ParserException();
+				}
+			}
+			catch(std::exception & e)
+			{
+				std::cout << e.what() << std::endl;
+				std::exit(EXIT_FAILURE);
 			}
 			if (!tokens.empty())
 			{

@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:56:57 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/15 16:35:59 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/16 05:40:28 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ class Parser
 		~Parser(void);
 
 		std::string		extractInstruction(std::string instr);
-		eOperandType	extractType(std::string type) const;
-		std::string		extractValue(std::string val) const;
+		eOperandType	extractType(std::string type);
+		std::string		extractValue(std::string val);
 
 		//Getters
 		std::string		getInstruction(void) const;
@@ -42,7 +42,7 @@ class Parser
 		void			setType(eOperandType type);
 		void			setValue(std::string value);
 
-		int				isValidOperand(std::string line);
+		int				isValidNum(std::string val);
 
 		int				exitFound = 0;
 

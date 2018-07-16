@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 12:54:56 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/15 16:40:32 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/15 23:33:44 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,22 @@ int		main(int argc, char **argv)
 		}
 		listOfCommands.push_back(parse);
 	}
-	if (parse.exitFound == 0)
+	try 
 	{
-		throw Error::NoExitException();
-	}
-	else
-	{
-		for (int i = 0; i < listOfCommands.size(); i++)
+		if (parse.exitFound == 0)
 		{
-			calc.executeCommand(listOfCommands[i], vmStack);
+			throw Error::NoExitException();
 		}
+	}
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
+	}
+	
+	for (int i = 0; i < listOfCommands.size(); i++)
+	{
+		calc.executeCommand(listOfCommands[i], vmStack);
 	}
 	return (0);
 }

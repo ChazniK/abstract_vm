@@ -6,11 +6,12 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:21:00 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/13 13:01:17 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/15 22:41:15 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Double.hpp"
+#include "Error.hpp"
 
 Double::Double(void)
 {
@@ -20,15 +21,29 @@ Double::Double(void)
 Double::Double(const std::string numAsString, eOperandType type)
 {
 	long double val = stold(numAsString);
-	if (val > __DBL_MAX__)
+	try
 	{
-		std::cout << "Float overflow" << std::endl;
-		return;
+		if (val > __DBL_MAX__)
+		{
+			throw Error::OverflowException();
+		}
+	}	
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
-	else if (val < __DBL_MIN__)
+	try 
 	{
-		std::cout << "Float underflow" << std::endl;
-		return;
+		if (val < __DBL_MIN__)
+		{
+			throw Error::UnderflowException();
+		}
+	}
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
 	double_t temp = static_cast<double_t>(val);
 	this->_value = std::to_string(temp);

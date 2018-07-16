@@ -22,7 +22,6 @@ void	Calculator::push(Parser parse, std::vector<IOperand const *> & vmStack)
 	IOperand const * newOperand;
 
 	newOperand = fact.createOperand(parse.getType(), parse.getValue());
-	// std::cout << "Creating " << newOperand->getType() << " - " << newOperand->toString() << std::endl;
 	vmStack.push_back(newOperand);	
 }
 
@@ -30,27 +29,42 @@ void	Calculator::pop(Parser parse, std::vector<IOperand const *> & vmStack)
 {
 	OperandFactory fact;
 	IOperand const * poppedOperand;
-
-	if (vmStack.size() > 0)
+	try
 	{
-		poppedOperand = vmStack.back();
-		vmStack.pop_back();
+		if (vmStack.size() > 0)
+		{
+			poppedOperand = vmStack.back();
+			vmStack.pop_back();
+		}
+		else
+			throw Error::EmtyStackException();
 	}
-	else
-		throw Error::EmtyStackException();
+	catch(std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
+	}
 }
 
 void	Calculator::dump(std::vector<IOperand const *> & vmStack)
 {
-	if (vmStack.size() > 0)
+	try
 	{
-		for (std::vector<IOperand const *>::reverse_iterator i = vmStack.rbegin(); i != vmStack.rend(); ++i)
+		if (vmStack.size() > 0)
 		{
-			std::cout << (*i)->toString() << std::endl;
+			for (std::vector<IOperand const *>::reverse_iterator i = vmStack.rbegin(); i != vmStack.rend(); ++i)
+			{
+				std::cout << (*i)->toString() << std::endl;
+			}
 		}
+		else
+			throw Error::EmtyStackException();
 	}
-	else
-		throw Error::EmtyStackException();
+	catch(std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
+	}	
 }
 
 void	Calculator::assert(Parser parse, std::vector<IOperand const *> & vmStack)
@@ -59,19 +73,27 @@ void	Calculator::assert(Parser parse, std::vector<IOperand const *> & vmStack)
 	long double			parsedVal;
 	long double			assertedVal;	
 
-	if (vmStack.size() > 0)
+	try
 	{
-		assertOperand = vmStack.back();
-		parsedVal = std::stold(parse.getValue());
-		assertedVal = std::stold(assertOperand->toString());
-		if ((parse.getType() == assertOperand->getType()) && (parsedVal == assertedVal))
-		{			
+		if (vmStack.size() > 0)
+		{
+			assertOperand = vmStack.back();
+			parsedVal = std::stold(parse.getValue());
+			assertedVal = std::stold(assertOperand->toString());
+			if ((parse.getType() == assertOperand->getType()) && (parsedVal == assertedVal))
+			{			
+			}
+			else
+				throw Error::FalseAssertException();
 		}
 		else
-			throw Error::FalseAssertException();
+			throw Error::EmtyStackException();
 	}
-	else
-		throw Error::EmtyStackException();
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
+	}	
 }
 
 void	Calculator::add(std::vector<IOperand const *> & vmStack)
@@ -79,18 +101,23 @@ void	Calculator::add(std::vector<IOperand const *> & vmStack)
 	IOperand const * val1;
 	IOperand const * val2;
 
-	if (vmStack.size() < 2)
+	try
 	{
-		throw Error::TooFewValuesException();
+		if (vmStack.size() < 2)
+		{
+			throw Error::TooFewValuesException();
+		}
 	}
-	else
+	catch (std::exception & e)
 	{
-		val1 = vmStack.back();
-		vmStack.pop_back();
-		val2 = vmStack.back();
-		vmStack.pop_back();
-		vmStack.push_back(*val2 + *val1);;
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
+	val1 = vmStack.back();
+	vmStack.pop_back();
+	val2 = vmStack.back();
+	vmStack.pop_back();
+	vmStack.push_back(*val2 + *val1);
 }
 
 void	Calculator::sub(std::vector<IOperand const *> & vmStack)	
@@ -98,18 +125,23 @@ void	Calculator::sub(std::vector<IOperand const *> & vmStack)
 	IOperand const * val1;
 	IOperand const * val2;
 
-	if (vmStack.size() < 2)
+	try
 	{
-		throw Error::TooFewValuesException();	
+		if (vmStack.size() < 2)
+		{
+			throw Error::TooFewValuesException();
+		}
 	}
-	else
+	catch (std::exception & e)
 	{
-		val1 = vmStack.back();
-		vmStack.pop_back();
-		val2 = vmStack.back();
-		vmStack.pop_back();
-		vmStack.push_back(*val2 - *val1);
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
+	val1 = vmStack.back();
+	vmStack.pop_back();
+	val2 = vmStack.back();
+	vmStack.pop_back();
+	vmStack.push_back(*val2 - *val1);
 }
 
 void	Calculator::mul(std::vector<IOperand const *> & vmStack)	
@@ -117,18 +149,23 @@ void	Calculator::mul(std::vector<IOperand const *> & vmStack)
 	IOperand const * val1;
 	IOperand const * val2;
 
-	if (vmStack.size() < 2)
+	try
 	{
-		throw Error::TooFewValuesException();	
+		if (vmStack.size() < 2)
+		{
+			throw Error::TooFewValuesException();
+		}
 	}
-	else
+	catch (std::exception & e)
 	{
-		val1 = vmStack.back();
-		vmStack.pop_back();
-		val2 = vmStack.back();
-		vmStack.pop_back();
-		vmStack.push_back(*val2 * *val1);
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
+	val1 = vmStack.back();
+	vmStack.pop_back();
+	val2 = vmStack.back();
+	vmStack.pop_back();
+	vmStack.push_back(*val2 * *val1);
 }
 
 void	Calculator::div(std::vector<IOperand const *> & vmStack)	
@@ -136,23 +173,36 @@ void	Calculator::div(std::vector<IOperand const *> & vmStack)
 	IOperand const * val1;
 	IOperand const * val2;
 
-	if (vmStack.size() < 2)
+	try
 	{
-		throw Error::TooFewValuesException();
+		if (vmStack.size() < 2)
+		{
+			throw Error::TooFewValuesException();
+		}
 	}
-	else
+	catch (std::exception & e)
 	{
-		val1 = vmStack.back();
-		vmStack.pop_back();
-		val2 = vmStack.back();
-		vmStack.pop_back();
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
+	}
+	
+	val1 = vmStack.back();
+	vmStack.pop_back();
+	val2 = vmStack.back();
+	vmStack.pop_back();
+	try 
+	{
 		if (val1->toString() == "0")
 		{
 			throw Error::DivisionModuloByZeroException();
 		}
-		else
-			vmStack.push_back(*val2 / *val1);
 	}
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
+	}
+	vmStack.push_back(*val2 / *val1);
 }
 
 void	Calculator::mod(std::vector<IOperand const *> & vmStack)	
@@ -160,23 +210,36 @@ void	Calculator::mod(std::vector<IOperand const *> & vmStack)
 	IOperand const * val1;
 	IOperand const * val2;
 
-	if (vmStack.size() < 2)
+	try
 	{
-		throw Error::TooFewValuesException();
+		if (vmStack.size() < 2)
+		{
+			throw Error::TooFewValuesException();
+		}
 	}
-	else
+	catch (std::exception & e)
 	{
-		val1 = vmStack.back();
-		vmStack.pop_back();
-		val2 = vmStack.back();
-		vmStack.pop_back();
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
+	}
+	
+	val1 = vmStack.back();
+	vmStack.pop_back();
+	val2 = vmStack.back();
+	vmStack.pop_back();
+	try 
+	{
 		if (val1->toString() == "0")
 		{
 			throw Error::DivisionModuloByZeroException();
 		}
-		else
-			vmStack.push_back(*val2 % *val1);
 	}
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
+	}
+	vmStack.push_back(*val2 % *val1);
 }
 
 void	Calculator::print(std::vector<IOperand const *> & vmStack)
@@ -185,27 +248,30 @@ void	Calculator::print(std::vector<IOperand const *> & vmStack)
 	long double		convertedAssert;
 	char			valAsChar;
 
-	if (vmStack.size() > 0)
+	try
 	{
-		assertedVal = vmStack.back();
-		if (assertedVal->getType() == INT8)
+		if (vmStack.size() > 0)
 		{
-			convertedAssert = stold(assertedVal->toString());
-			std::cout << convertedAssert << std::endl;
-			valAsChar = static_cast<char>(convertedAssert);
-			std::cout << valAsChar << std::endl;
+			assertedVal = vmStack.back();
+			if (assertedVal->getType() == INT8)
+			{
+				convertedAssert = stold(assertedVal->toString());
+				std::cout << convertedAssert << std::endl;
+				valAsChar = static_cast<char>(convertedAssert);
+				std::cout << valAsChar << std::endl;
+			}
+			else
+				throw Error::FalseAssertException();
 		}
 		else
-			throw Error::FalseAssertException();
+			throw Error::EmtyStackException();
 	}
-	else
-		throw Error::EmtyStackException();
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
+	}	
 }
-
-// void	Calculator::exit(void)
-// {
-
-// }
 
 void	Calculator::executeCommand(Parser parse, std::vector<IOperand const *> & vmStack)
 {

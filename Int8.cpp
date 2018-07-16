@@ -6,11 +6,12 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:08:52 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/13 18:57:23 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/15 22:33:41 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Int8.hpp"
+#include "Error.hpp"
 
 Int8::Int8(void)
 {
@@ -26,20 +27,33 @@ Int8::Int8(Int8 const & src)
 Int8::Int8(const std::string numAsString, eOperandType type)
 {
 	int t = stold(numAsString);
-	if (t > INT8_MAX)
+	try
 	{
-		std::cout << "Int8 overflow" << std::endl;
-	}
-	else if (t < INT8_MIN)
+		if (t > INT8_MAX)
+		{
+			throw Error::OverflowException();
+		}
+	}	
+	catch (std::exception & e)
 	{
-		std::cout << "Int8 underflow" << std::endl;
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
-	else
+	try 
 	{
-		int8_t temp = static_cast<int8_t>(t);
-		this->_value = std::to_string(temp);
-		this->_type = type;
+		if (t < INT8_MIN)
+		{
+			throw Error::UnderflowException();
+		}
 	}
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
+	}
+	int8_t temp = static_cast<int8_t>(t);
+	this->_value = std::to_string(temp);
+	this->_type = type;
 	// std::cout << "Constructor with of type: " << type << " value: " << numAsString << std::endl;
 }
 

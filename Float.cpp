@@ -6,11 +6,12 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:21:00 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/13 12:59:54 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/15 22:38:52 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Float.hpp"
+#include "Error.hpp"
 
 Float::Float(void)
 {
@@ -20,15 +21,29 @@ Float::Float(void)
 Float::Float(const std::string numAsString, eOperandType type)
 {
 	long double t = stold(numAsString);
-	if (t > __FLT_MAX__)
+	try
 	{
-		std::cout << "Float overflow" << std::endl;
-		return;
+		if (t > __FLT_MAX__)
+		{
+			throw Error::OverflowException();
+		}
+	}	
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
-	else if (t < __FLT_MIN__)
+	try 
 	{
-		std::cout << "Float underflow" << std::endl;
-		return;
+		if (t < __FLT_MIN__)
+		{
+			throw Error::UnderflowException();
+		}
+	}
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
 	float_t temp = static_cast<float_t>(t);
 	this->_value = std::to_string(temp);

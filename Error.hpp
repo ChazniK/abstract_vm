@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 12:00:06 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/15 16:03:04 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/15 22:38:04 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@ class Error
 				}
 		};
 
+		class ParserException: public std::exception
+		{
+			public:
+				virtual const char* what() const throw()
+				{
+					return ("Error, line can not be parsed");
+				}
+		};
+
 		class InvalidOperandException: public std::exception
 		{
 			public:
@@ -46,7 +55,7 @@ class Error
 				}
 		};
 
-		class UnderlowException: public std::exception
+		class UnderflowException: public std::exception
 		{
 			public:
 				virtual const char* what() const throw()

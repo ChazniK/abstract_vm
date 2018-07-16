@@ -6,12 +6,13 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:57:37 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/15 16:36:16 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/16 05:45:28 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Parser.hpp"
 #include "Error.hpp"
+#include <sstream>
 
 Parser::Parser(void)
 {
@@ -27,7 +28,7 @@ Parser::~Parser(void)
 
 std::string	Parser::extractInstruction(std::string currentCommand)
 {
-	std::string command;
+	std::string command = "";
 
 	if (currentCommand == "push")
 	{
@@ -78,45 +79,61 @@ std::string	Parser::extractInstruction(std::string currentCommand)
 	{
 		std::cout << "End of program read from std::in" << std::endl;
 	}
-	else
+	try
 	{
-		throw Error::UnknownInstructionException();
+		if (command == "")
+		{
+			throw Error::UnknownInstructionException();
+		}
+	}
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
 	return (command);
 }
 
-eOperandType	Parser::extractType(std::string type) const
+eOperandType	Parser::extractType(std::string type)
 {
 	eOperandType	currentType;
 
-	if (type.compare(0, 4, "int8") == 0)
+	try
 	{
-		currentType = INT8;
+		if (type.compare(0, 4, "int8") == 0)
+		{
+			currentType = INT8;
+		}
+		else if (type.compare(0, 5, "int16") == 0)
+		{
+			currentType = INT16;
+		}
+		else if (type.compare(0, 5, "int32") == 0)
+		{
+			currentType = INT32;
+		}
+		else if (type.compare(0, 5, "float") == 0)
+		{
+			currentType = FLOAT;
+		}
+		else if (type.compare(0, 6, "double") == 0)
+		{
+			currentType = DOUBLE;
+		}
+		else
+		{
+			throw Error::InvalidOperandException();
+		}
 	}
-	else if (type.compare(0, 5, "int16") == 0)
+	catch (std::exception & e)
 	{
-		currentType = INT16;
-	}
-	else if (type.compare(0, 5, "int32") == 0)
-	{
-		currentType = INT32;
-	}
-	else if (type.compare(0, 5, "float") == 0)
-	{
-		currentType = FLOAT;
-	}
-	else if (type.compare(0, 6, "double") == 0)
-	{
-		currentType = DOUBLE;
-	}
-	else
-	{
-		throw Error::InvalidOperandException();
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
 	return (currentType);
 }
 
-std::string	Parser::extractValue(std::string val) const
+std::string	Parser::extractValue(std::string val)
 {
 
 	if (val.compare(0, 4, "int8") == 0)
@@ -144,13 +161,33 @@ std::string	Parser::extractValue(std::string val) const
 		val.erase(0, 7);
 		val.erase(val.end() - 1);
 	}
-	else
+	try
 	{
-		std::cout << "value not valid" << std::endl;
-		return ("");
+		if (isValidNum(val) == 0)
+		{
+			throw Error::ParserException();
+		}
 	}
-	return val;
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
+	}
+	return (val);
 }
+
+int			Parser::isValidNum(std::string val)
+{
+	long double	num;
+
+	std::stringstream stream(val);
+	if (stream >> num)
+	{
+		return (1);
+	}
+	return (0);
+}
+
 
 std::string	Parser::getInstruction(void) const
 {

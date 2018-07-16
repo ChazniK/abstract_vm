@@ -6,11 +6,12 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:17:32 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/13 12:33:50 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/15 22:38:38 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Int16.hpp"
+#include "Error.hpp"
 
 Int16::Int16(void)
 {
@@ -20,15 +21,29 @@ Int16::Int16(void)
 Int16::Int16(const std::string numAsString, eOperandType type)
 {
 	long double t = stold(numAsString);
-	if (t > INT16_MAX)
+	try
 	{
-		std::cout << "Int16 overflow" << std::endl;
-		return;
+		if (t > INT16_MAX)
+		{
+			throw Error::OverflowException();
+		}
+	}	
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
-	else if (t < INT16_MIN)
+	try 
 	{
-		std::cout << "Int16 underflow" << std::endl;
-		return;
+		if (t < INT16_MIN)
+		{
+			throw Error::UnderflowException();
+		}
+	}
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
 	int16_t temp = static_cast<int16_t>(t);
 	this->_value = std::to_string(temp);

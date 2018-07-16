@@ -6,11 +6,12 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 16:03:19 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/13 12:37:10 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/15 22:38:45 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Int32.hpp"
+#include "Error.hpp"
 
 Int32::Int32(void)
 {
@@ -20,15 +21,29 @@ Int32::Int32(void)
 Int32::Int32(const std::string numAsString, eOperandType type)
 {
 	long double t = stold(numAsString);
-	if (t > INT32_MAX)
+	try
 	{
-		std::cout << "Int32 overflow" << std::endl;
-		return;
+		if (t > INT32_MAX)
+		{
+			throw Error::OverflowException();
+		}
+	}	
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
-	else if (t < INT32_MIN)
+	try 
 	{
-		std::cout << "Int32 underflow" << std::endl;
-		return;
+		if (t < INT32_MIN)
+		{
+			throw Error::UnderflowException();
+		}
+	}
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
 	int32_t temp = static_cast<int32_t>(t);
 	this->_value = std::to_string(temp);
