@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 12:00:06 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/15 22:38:04 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/16 14:11:32 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,91 +22,62 @@ class Error
 		class UnknownInstructionException: public std::exception
 		{
 			public:
-				virtual const char* what() const throw()
-				{
-					return ("Error, unknown instruction entered");
-				}
+				virtual const char* what() const throw();
 		};
 
 		class ParserException: public std::exception
 		{
 			public:
-				virtual const char* what() const throw()
-				{
-					return ("Error, line can not be parsed");
-				}
+				virtual const char* what() const throw();
 		};
 
 		class InvalidOperandException: public std::exception
 		{
 			public:
-				virtual const char* what() const throw()
-				{
-					return ("Error, unknown operand entered");
-				}
+				virtual const char* what() const throw();
 		};
 		
 		class OverflowException: public std::exception
 		{
 			public:
-				virtual const char* what() const throw()
-				{
-					return ("Error, overflow on value");
-				}
+				virtual const char* what() const throw();
+				
 		};
 
 		class UnderflowException: public std::exception
 		{
 			public:
-				virtual const char* what() const throw()
-				{
-					return ("Error, underflow on value");
-				}
+				virtual const char* what() const throw();
 		};
 
 		class EmtyStackException: public std::exception
 		{
 			public:
-				virtual const char* what() const throw()
-				{
-					return ("Error, stack is empty");
-				}
+				virtual const char* what() const throw();
 		};
 
 		class DivisionModuloByZeroException: public std::exception
 		{
 			public:
-				virtual const char* what() const throw()
-				{
-					return ("Error, division or modulo by 0");
-				}
+				virtual const char* what() const throw();
 		};
 
 		class NoExitException: public std::exception
 		{
 			public:
-				virtual const char* what() const throw()
-				{
-					return ("Error, no exit found");
-				}
+				virtual const char* what() const throw();
 		};
 
 		class FalseAssertException: public std::exception
 		{
 			public:
-				virtual const char* what() const throw()
-				{
-					return ("Error, assert is not true");
-				}
+				virtual const char* what() const throw();
 		};
 
 		class TooFewValuesException: public std::exception
 		{
 			public:
-				virtual const char* what() const throw()
-				{
-					return ("Error, less than two values on stack");
-				}
+				virtual const char* what() const throw();
 		};
 };
 
