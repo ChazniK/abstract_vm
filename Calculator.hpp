@@ -14,7 +14,7 @@ class Calculator
 	~Calculator(void);
   
   	void	push(Parser parse, std::vector<IOperand const *> & vmStack);
-	void	pop(Parser parse, std::vector<IOperand const *> & vmStack);
+	void	pop(std::vector<IOperand const *> & vmStack);
 	void	dump(std::vector<IOperand const *> & vmStack);
 	void	assert(Parser parse, std::vector<IOperand const *> & vmStack);
 	void	add(std::vector<IOperand const *> & vmStack);

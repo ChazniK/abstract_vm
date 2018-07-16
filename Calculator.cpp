@@ -20,7 +20,7 @@ void	Calculator::push(Parser parse, std::vector<IOperand const *> & vmStack)
 	vmStack.push_back(newOperand);	
 }
 
-void	Calculator::pop(Parser parse, std::vector<IOperand const *> & vmStack)
+void	Calculator::pop(std::vector<IOperand const *> & vmStack)
 {
 	OperandFactory fact;
 	IOperand const * poppedOperand;
@@ -276,7 +276,7 @@ void	Calculator::executeCommand(Parser parse, std::vector<IOperand const *> & vm
 	}
 	else if (parse.getInstruction() == "pop")
 	{
-		pop(parse, vmStack);
+		pop(vmStack);
 	}
 	else if (parse.getInstruction() == "dump")
 	{
