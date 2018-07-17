@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 12:17:59 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/16 15:12:48 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/17 10:33:53 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ class Int8: public IOperand
 
 		virtual std::string const & toString( void ) const;
 
-		virtual Int8 & operator=(Int8 const & src);
+		Int8 & operator=(Int8 const & src);
 
 	private:
 

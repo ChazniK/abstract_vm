@@ -6,13 +6,14 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:57:37 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/16 17:40:59 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/17 10:32:56 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Parser.hpp"
 #include "Error.hpp"
 #include <sstream>
+#include <regex>
 
 Parser::Parser(void)
 {
@@ -21,7 +22,6 @@ Parser::Parser(void)
 
 Parser::Parser(Parser const & src)
 {
-	std::cout << "Copy" << "\n";
 	if (this != &src)
 	{
 		*this = src;
@@ -170,8 +170,9 @@ std::string	Parser::extractValue(std::string val)
 	}
 	try
 	{
-		if (isValidNum(val) == 0)
-		{
+		if (!isValidNum(val))
+		{	
+			std::cout << "Value being paresd is invalid\n";
 			throw Error::ParserException();
 		}
 	}
@@ -183,18 +184,10 @@ std::string	Parser::extractValue(std::string val)
 	return (val);
 }
 
-int			Parser::isValidNum(std::string val)
+bool		Parser::isValidNum(std::string val)
 {
-	long double	num;
-
-	std::stringstream stream(val);
-	if (stream >> num)
-	{
-		return (1);
-	}
-	return (0);
+	return std::regex_match(val, std::regex(("((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?")));
 }
-
 
 std::string	Parser::getInstruction(void) const
 {
@@ -228,7 +221,6 @@ void		Parser::setValue(std::string value)
 
 Parser & Parser::operator=(Parser const & src)
 {
-	std::cout << "assing" << std::endl;
 	this->_instruction = src.getInstruction();
 	this->_type = src.getType();
 	this->_value = src.getValue();
