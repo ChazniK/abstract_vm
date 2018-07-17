@@ -43,7 +43,7 @@ class Lexer
 		void    readFromStdin(void);
 		void    readFromFile(std::string fileName);
 
-		virtual Lexer & operator=(Lexer const & src);
+		Lexer & operator=(Lexer const & src);
 
 	private:
 		
