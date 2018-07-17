@@ -21,7 +21,11 @@ Parser::Parser(void)
 
 Parser::Parser(Parser const & src)
 {
-	src.getType();
+	std::cout << "Copy" << "\n";
+	if (this != &src)
+	{
+		*this = src;
+	}
 }
 
 Parser::~Parser(void)
@@ -224,6 +228,7 @@ void		Parser::setValue(std::string value)
 
 Parser & Parser::operator=(Parser const & src)
 {
+	std::cout << "assing" << std::endl;
 	this->_instruction = src.getInstruction();
 	this->_type = src.getType();
 	this->_value = src.getValue();

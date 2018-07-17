@@ -47,7 +47,7 @@ class Parser
 
 		int				exitFound = 0;
 
-		virtual	Parser & operator=(Parser const & src);
+		Parser & operator=(Parser const & src);
 
 	private:
 
