@@ -311,7 +311,7 @@ void	Calculator::executeCommand(Parser parse, std::vector<IOperand const *> & vm
 	}
 	else if (parse.getInstruction() == "exit")
 	{
-		std::exit(EXIT_SUCCESS);
+		std::exit(EXIT_FAILURE);
 	}
 	else if (parse.getInstruction() == ";;")
 	{

@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 09:05:16 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/17 10:52:35 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/16 17:34:46 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ Lexer::Lexer(void)
 
 Lexer::Lexer(Lexer const & src)
 {
-	if (this != &src)
-	{
-		*this = src;
-	}
+	src.getInputType();
 }
 
 

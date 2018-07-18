@@ -6,7 +6,7 @@
 /*   By: ckatz <ckatz@student.wethinkcode.co.za>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 12:54:56 by ckatz             #+#    #+#             */
-/*   Updated: 2018/07/16 16:42:14 by ckatz            ###   ########.fr       */
+/*   Updated: 2018/07/17 11:48:00 by ckatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ int		main(int argc, char **argv)
 		{
 			parse.setType(parse.extractType(listOfTokens[i][1]));
 			parse.setValue(parse.extractValue(listOfTokens[i][1]));
+		}
+		if (parse.getInstruction() == "exit")
+		{
+			break;
 		}
 		listOfCommands.push_back(parse);
 	}
